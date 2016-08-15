@@ -1,0 +1,16 @@
+[
+{
+  "modid": "essencearmory",
+  "name": "Essence Armory",
+  "description": "Adds armors.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Escapee,SirShadow"],
+  "credits": "To us!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
