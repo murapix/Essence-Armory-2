@@ -8,8 +8,8 @@ public class LibMain
     public class ModInfo
     {
         public static final String
-        mod_id =  "essencearmory",
-        mod_name = "Essence Armory",
+        mod_id =  "essencearmory2",
+        mod_name = "Essence Armory2",
         mod_version = "0.1",
         client_proxy_class = "escapee.essencearmory2.proxy.ClientProxy",
         server_proxy_class = "escapee.essencearmory2.proxy.ServerProxy",
