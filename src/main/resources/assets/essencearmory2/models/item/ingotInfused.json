@@ -2,7 +2,7 @@
   "parent": "builtin/generated",
   "textures":
   {
-    "layer0": "essencearmory:items/ingotInfused"
+    "layer0": "essencearmory2:items/ingotInfused"
   },
   "display":
   {

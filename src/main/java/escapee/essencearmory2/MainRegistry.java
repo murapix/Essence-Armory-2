@@ -1,7 +1,9 @@
 package escapee.essencearmory2;
 
 import escapee.essencearmory2.common.blocks.base.BlockBaseEA;
+import escapee.essencearmory2.common.items.ItemIngot;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
+import escapee.essencearmory2.common.utils.helper.TextHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class MainRegistry
          * Other
          */
 
+        TextHelper.addColorsAndComponents();
+
         recipeRegistry.registerRecipes();
     }
 
@@ -40,7 +44,7 @@ public class MainRegistry
 
         public static final ArrayList<ItemBaseEA>ITEMS = new ArrayList<ItemBaseEA>();
 
-        public static ItemBaseEA itemInfusedIngot = new ItemBaseEA("ingotInfused");
+        public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
 
         private static void registerItems()
         {
