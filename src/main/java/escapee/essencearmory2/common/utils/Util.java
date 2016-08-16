@@ -12,17 +12,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class Util
 {
-    public static CreativeTabs tabEssence = new CreativeTabs(LibMain.ModInfo.mod_id) {
-        @Override
-        public String getTabLabel() {
-            return LibMain.ModInfo.mod_id;
-        }
+	public static CreativeTabs tabEssence = new CreativeTabs(LibMain.ModInfo.MOD_ID)
+	{
+		@Override
+		public String getTabLabel()
+		{
+			return LibMain.ModInfo.MOD_ID;
+		}
 
-        @Override
-        @SideOnly(Side.CLIENT)
-        public Item getTabIconItem() {
-            return MainRegistry.itemRegistry.itemInfusedIngot;
-        }
-    };
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem()
+		{
+			return MainRegistry.itemRegistry.itemInfusedIngot;
+		}
+	};
 
 }

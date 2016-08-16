@@ -5,7 +5,6 @@ import escapee.essencearmory2.common.items.ItemIngot;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import java.util.ArrayList;
 
 /**
@@ -14,78 +13,79 @@ import java.util.ArrayList;
 public class MainRegistry
 {
 
-    public static void register()
-    {
-        /**
-         * Items
-         */
-        itemRegistry.registerItems();
-        itemRegistry.itemRenderRegistry();
+	public static void register()
+	{
+		/**
+		 * Items
+		 */
+		itemRegistry.registerItems();
+		itemRegistry.itemRenderRegistry();
 
+		/**
+		 * Blocks and tile entities
+		 */
+		blockRegistry.registerBlocks();
+		blockRegistry.blockRenderRegistry();
+		blockRegistry.tileEntityRegisty();
 
-        /**
-         * Blocks and tile entities
-         */
-        blockRegistry.registerBlocks();
-        blockRegistry.blockRenderRegistry();
-        blockRegistry.tileEntityRegisty();
+		/**
+		 * Other
+		 */
 
-        /**
-         * Other
-         */
+		TextHelper.addColorsAndComponents();
 
-        TextHelper.addColorsAndComponents();
+		recipeRegistry.registerRecipes();
+	}
 
-        recipeRegistry.registerRecipes();
-    }
+	public static class itemRegistry
+	{
 
-    public static class itemRegistry
-    {
+		public static final ArrayList<ItemBaseEA> ITEMS = new ArrayList<ItemBaseEA>();
 
-        public static final ArrayList<ItemBaseEA>ITEMS = new ArrayList<ItemBaseEA>();
+		public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
 
-        public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
+		private static void registerItems()
+		{
+			for (ItemBaseEA itemBaseEA : ITEMS)
+			{
+				GameRegistry.register(itemBaseEA);
+			}
+		}
 
-        private static void registerItems()
-        {
-            for(ItemBaseEA itemBaseEA : ITEMS)
-            {
-                GameRegistry.register(itemBaseEA);
-            }
-        }
+		private static void itemRenderRegistry()
+		{
+			ITEMS.forEach(ItemBaseEA::initModelsAndVariants);
+		}
+	}
 
-        private static void itemRenderRegistry()
-        {
-            ITEMS.forEach(ItemBaseEA::initModelsAndVariants);
-        }
-    }
+	public static class blockRegistry
+	{
 
-    public static class blockRegistry
-    {
+		public static final ArrayList<BlockBaseEA> BLOCKS = new ArrayList<BlockBaseEA>();
 
-        public static final ArrayList<BlockBaseEA>BLOCKS = new ArrayList<BlockBaseEA>();
+		private static void registerBlocks()
+		{
 
-        private static void registerBlocks()
-        {
+		}
 
-        }
+		private static void blockRenderRegistry()
+		{
+			BLOCKS.forEach(BlockBaseEA::initModelsAndVariants);
+		}
 
-        private static void blockRenderRegistry()
-        {
-            BLOCKS.forEach(BlockBaseEA::initModelsAndVariants);
-        }
+		private static void tileEntityRegisty()
+		{
+			// example:
+			// GameRegistry.registerTileEntityWithAlternatives(TileEntityExample.class,
+			// LibMain.LibUtils.customTileName("example"));
+		}
+	}
 
-        private static void tileEntityRegisty()
-        {
-            //example: GameRegistry.registerTileEntityWithAlternatives(TileEntityExample.class, LibMain.LibUtils.customTileName("example"));
-        }
-    }
+	public static class recipeRegistry
+	{
+		public static void registerRecipes()
+		{
 
-    public static class recipeRegistry
-    {
-        public static void registerRecipes()
-        {
-
-        }
-    }
+		}
+	}
 }

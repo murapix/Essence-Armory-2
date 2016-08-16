@@ -1,12 +1,10 @@
 package escapee.essencearmory2.common.items;
 
-import escapee.essencearmory2.common.items.base.ItemBaseEA;
-import escapee.essencearmory2.common.utils.helper.TextHelper;
+import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
+import escapee.essencearmory2.common.items.base.ItemBaseEA;
+import escapee.essencearmory2.common.utils.helper.TextHelper;
 
 /**
  * Created by SirShadow on 15.8.2016.

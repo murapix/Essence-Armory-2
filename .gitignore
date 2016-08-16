@@ -1,25 +1,24 @@
-## gradle
-/.gradle
-/build
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+run
+
+# gradle
+build
+.gradle
 /gradle
-/gradlew
-/gradlew.bat
 
-## ForgeGradle
-/run
-
-## eclipse
-/eclipse
-/.settings
-/.metadata
-/.classpath
-/.project
-/bin
-
-## intellij
-/out
-/.idea
-/*.iml
-/*.ipr
-/*.iws
-/atlassian-ide-plugin.xml
+# other
+eclipse
+run

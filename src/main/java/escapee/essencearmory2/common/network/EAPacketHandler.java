@@ -10,17 +10,17 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public class EAPacketHandler
 {
-    public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(LibMain.ModInfo.mod_id);
+	public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(LibMain.ModInfo.MOD_ID);
 
-    private static int id = 0;
+	private static int id = 0;
 
-    public static void register()
-    {
+	public static void register()
+	{
 
-    }
+	}
 
-    private static void registerMessage(Class clazz,Side side)
-    {
-        INSTANCE.registerMessage(clazz,clazz,id++,side);
-    }
+	private static void registerMessage(Class clazz, Side side)
+	{
+		INSTANCE.registerMessage(clazz, clazz, id++, side);
+	}
 }

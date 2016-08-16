@@ -1,7 +1,6 @@
 package escapee.essencearmory2.common.items.base;
 
-import escapee.essencearmory2.MainRegistry;
-import escapee.essencearmory2.common.utils.Util;
+import java.util.List;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -11,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
+import escapee.essencearmory2.MainRegistry;
+import escapee.essencearmory2.common.utils.Util;
 
 /**
  * Created by SirShadow on 14.8.2016.
