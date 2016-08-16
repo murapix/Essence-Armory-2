@@ -1,11 +1,9 @@
 package escapee.essencearmory2.common.utils.helper;
 
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -23,11 +21,6 @@ public class TextHelper {
         return (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT));
     }
 
-    public static String localiseText(String text) {
-        return I18n.format(text);
-    }
-
-
     /**
      * Used for debugging
      *
@@ -35,11 +28,11 @@ public class TextHelper {
      * @return
      */
     public static String debugText(String text) {
-        return BLUE + "[" + LIGHT_BLUE + "DeBug" + BLUE + "]" + END + ": " + text;
+        return BLUE + "[" + LIGHT_BLUE + "debug" + BLUE + "]" + END + ": " + text;
     }
 
     /**
-     * @param text      your very special text!
+     * @param text your very special text!
      * @param textColor use to set the string color not to add text(use: TextHelper.BLUE or any other string color)!!
      * @return
      */
@@ -135,30 +128,30 @@ public class TextHelper {
     /**
      * Colors
      */
-    public static final String BLACK = (char) 167 + "0";
-    public static final String BLUE = (char) 167 + "1";
-    public static final String GREEN = (char) 167 + "2";
+    public static final String BLACK = TextFormatting.BLACK.toString();
+    public static final String BLUE = TextFormatting.BLUE.toString();
+    public static final String GREEN = TextFormatting.GREEN.toString();
     public static final String TEAL = (char) 167 + "3";
-    public static final String RED = (char) 167 + "4";
-    public static final String PURPLE = (char) 167 + "5";
+    public static final String RED = TextFormatting.RED.toString();
+    public static final String PURPLE = TextFormatting.LIGHT_PURPLE.toString();
     public static final String ORANGE = (char) 167 + "6";
     public static final String LIGHT_GRAY = (char) 167 + "7";
-    public static final String GRAY = (char) 167 + "8";
+    public static final String GRAY = TextFormatting.GRAY.toString();
     public static final String LIGHT_BLUE = (char) 167 + "9";
     public static final String BRIGHT_GREEN = (char) 167 + "a";
     public static final String BRIGHT_BLUE = (char) 167 + "b";
     public static final String LIGHT_RED = (char) 167 + "c";
     public static final String PINK = (char) 167 + "d";
-    public static final String YELLOW = (char) 167 + "e";
-    public static final String WHITE = (char) 167 + "f";
+    public static final String YELLOW = TextFormatting.YELLOW.toString();
+    public static final String WHITE = TextFormatting.WHITE.toString();
 
     /**
      * Components
      */
-    public static final String OBFUSCATED = (char) 167 + "k";
-    public static final String BOLD = (char) 167 + "l";
-    public static final String STRIKETHROUGH = (char) 167 + "m";
-    public static final String UNDERLINE = (char) 167 + "n";
-    public static final String ITALIC = (char) 167 + "o";
+    public static final String OBFUSCATED = TextFormatting.OBFUSCATED.toString();
+    public static final String BOLD = TextFormatting.BOLD.toString();
+    public static final String STRIKETHROUGH = TextFormatting.STRIKETHROUGH.toString();
+    public static final String UNDERLINE = TextFormatting.UNDERLINE.toString();
+    public static final String ITALIC = TextFormatting.ITALIC.toString();
     public static final String END = (char) 167 + "r";
 }
