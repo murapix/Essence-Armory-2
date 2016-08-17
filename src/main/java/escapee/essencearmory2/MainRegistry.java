@@ -1,10 +1,15 @@
 package escapee.essencearmory2;
 
+import escapee.essencearmory2.common.blocks.BlockMobTrap;
 import escapee.essencearmory2.common.blocks.base.BlockBaseEA;
-import escapee.essencearmory2.common.items.ItemIngot;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
+import escapee.essencearmory2.common.tile.TEMobTrap;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
+import escapee.essencearmory2.lib.LibMain;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import java.util.ArrayList;
 
 /**
@@ -13,79 +18,85 @@ import java.util.ArrayList;
 public class MainRegistry
 {
 
-	public static void register()
-	{
-		/**
-		 * Items
-		 */
-		itemRegistry.registerItems();
-		itemRegistry.itemRenderRegistry();
+    public static void register()
+    {
+        /**
+         * Items
+         */
+        itemRegistry.registerItems();
+        itemRegistry.itemRenderRegistry();
 
-		/**
-		 * Blocks and tile entities
-		 */
-		blockRegistry.registerBlocks();
-		blockRegistry.blockRenderRegistry();
-		blockRegistry.tileEntityRegisty();
 
-		/**
-		 * Other
-		 */
+        /**
+         * Blocks and tile entities
+         */
+        blockRegistry.registerBlocks();
+        blockRegistry.blockRenderRegistry();
+        blockRegistry.tileEntityRegisty();
 
-		TextHelper.addColorsAndComponents();
+        /**
+         * Other
+         */
 
-		recipeRegistry.registerRecipes();
-	}
+        TextHelper.addColorsAndComponents();
 
-	public static class itemRegistry
-	{
+        recipeRegistry.registerRecipes();
+    }
 
-		public static final ArrayList<ItemBaseEA> ITEMS = new ArrayList<ItemBaseEA>();
+    public static class itemRegistry
+    {
 
-		public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
+        public static final ArrayList<ItemBaseEA>ITEMS = new ArrayList<ItemBaseEA>();
 
-		private static void registerItems()
-		{
-			for (ItemBaseEA itemBaseEA : ITEMS)
-			{
-				GameRegistry.register(itemBaseEA);
-			}
-		}
+        public static ItemBaseEA itemInfusedIngot = new ItemBaseEA("ingotInfused");
 
-		private static void itemRenderRegistry()
-		{
-			ITEMS.forEach(ItemBaseEA::initModelsAndVariants);
-		}
-	}
+        private static void registerItems()
+        {
+            for(ItemBaseEA itemBaseEA : ITEMS)
+            {
+                GameRegistry.register(itemBaseEA);
+            }
+        }
 
-	public static class blockRegistry
-	{
+        private static void itemRenderRegistry()
+        {
+            ITEMS.forEach(ItemBaseEA::initModelsAndVariants);
+        }
+    }
 
-		public static final ArrayList<BlockBaseEA> BLOCKS = new ArrayList<BlockBaseEA>();
+    public static class blockRegistry
+    {
 
-		private static void registerBlocks()
-		{
+        public static final ArrayList<BlockBaseEA>BLOCKS = new ArrayList<BlockBaseEA>();
 
-		}
+        public static BlockBaseEA blockMobTrap = new BlockMobTrap("blockMobTrap");
 
-		private static void blockRenderRegistry()
-		{
-			BLOCKS.forEach(BlockBaseEA::initModelsAndVariants);
-		}
+        private static void registerBlocks()
+        {
+            for (BlockBaseEA blockBaseEA : BLOCKS)
+            {
+                GameRegistry.register(blockBaseEA);
+                GameRegistry.register(new ItemBlock(blockBaseEA).setRegistryName(blockBaseEA.getRegistryName()));
+            }
+        }
 
-		private static void tileEntityRegisty()
-		{
-			// example:
-			// GameRegistry.registerTileEntityWithAlternatives(TileEntityExample.class,
-			// LibMain.LibUtils.customTileName("example"));
-		}
-	}
+        private static void blockRenderRegistry()
+        {
+            BLOCKS.forEach(BlockBaseEA::initModelsAndVariants);
+        }
 
-	public static class recipeRegistry
-	{
-		public static void registerRecipes()
-		{
+        private static void tileEntityRegisty()
+        {
+            //example: GameRegistry.registerTileEntityWithAlternatives(TileEntityExample.class, LibMain.LibUtils.customTileName("example"));
+            GameRegistry.registerTileEntityWithAlternatives(TEMobTrap.class, LibMain.LibUtils.customTileName("mobtrap"));
+        }
+    }
 
-		}
-	}
+    public static class recipeRegistry
+    {
+        public static void registerRecipes()
+        {
+
+        }
+    }
 }
