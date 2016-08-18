@@ -1,14 +1,14 @@
 package escapee.essencearmory2;
 
 import java.util.ArrayList;
-
-import escapee.essencearmory2.common.items.ItemIngot;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import escapee.essencearmory2.common.blocks.BlockBrainExtractor;
 import escapee.essencearmory2.common.blocks.BlockMobTrap;
 import escapee.essencearmory2.common.blocks.base.BlockBaseEA;
 import escapee.essencearmory2.common.blocks.base.TEBlockEA;
+import escapee.essencearmory2.common.items.ItemIngot;
+import escapee.essencearmory2.common.items.ItemZombieBrain;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
 import escapee.essencearmory2.common.tile.TEBrainExtractor;
 import escapee.essencearmory2.common.tile.TEMobTrap;
@@ -52,6 +52,7 @@ public class MainRegistry
 
 
 		public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
+		public static ItemBaseEA zombieBrain = new ItemZombieBrain("zombieBrain");
 
 		private static void registerItems()
 		{

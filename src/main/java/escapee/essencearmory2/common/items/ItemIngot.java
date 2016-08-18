@@ -1,29 +1,24 @@
 package escapee.essencearmory2.common.items;
 
 import java.util.List;
-
-import escapee.essencearmory2.client.gui.screen.GuiResearchTablet;
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
-import escapee.essencearmory2.lib.LibMain;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import escapee.essencearmory2.common.items.base.ItemBaseEA;
-import escapee.essencearmory2.common.utils.helper.TextHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import escapee.essencearmory2.client.gui.screen.GuiResearchTablet;
+import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
+import escapee.essencearmory2.common.items.base.ItemBaseEA;
+import escapee.essencearmory2.common.utils.helper.TextHelper;
+import escapee.essencearmory2.lib.LibMain;
 
 /**
  * Created by SirShadow on 15.8.2016.
@@ -47,7 +42,7 @@ public class ItemIngot extends ItemBaseEA
         if (!stack.hasTagCompound()){
             stack.setTagCompound(new NBTTagCompound());
         }
-        stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.validKnowledge[stack.getItemDamage()]);
+        stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.getKnowledge(EntityZombie.class, stack.getItemDamage()));
         tooltip.add(TextHelper.localise("essencearmory2.tooltip.knowledge")+ " " + TextHelper.PURPLE + TextHelper.localise("essencearmory2.knowledge." + stack.getTagCompound().getString("knowledge")));
     }
 
@@ -85,10 +80,10 @@ public class ItemIngot extends ItemBaseEA
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected){
         if (!stack.hasTagCompound()){
             stack.setTagCompound(new NBTTagCompound());
-            stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.validKnowledge[(itemRand.nextInt(LibMain.LibKnowledge.validKnowledge.length))]);
+            stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.getRandomKnowledge(EntityZombie.class));
         }
         else {
-            stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.validKnowledge[stack.getItemDamage()]);
+            stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.getKnowledge(EntityZombie.class, stack.getItemDamage()));
         }
     }
 }

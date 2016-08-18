@@ -7,6 +7,7 @@ import escapee.essencearmory2.common.capability.EACapabilityManeger;
 import escapee.essencearmory2.common.network.EAPacketHandler;
 import escapee.essencearmory2.common.upgrade.UpgradeRegistry;
 import escapee.essencearmory2.common.utils.handler.ConfigHandler;
+import escapee.essencearmory2.lib.LibMain;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -34,6 +35,7 @@ public abstract class CommonProxy implements IProxy
         EAPacketHandler.register();
         EACapabilityManeger.registerCapability();
         UpgradeRegistry.init();
+        LibMain.LibKnowledge.init();
     }
 
     @Override
