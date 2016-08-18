@@ -1,3 +1,7 @@
-itemGroup.essencearmory=Essence Armory
+itemGroup.essencearmory2=Essence Armory
 
 item.ingotInfused.name=Infused Ingot
+
+essencearmory2.tooltip.knowledge=Research:
+
+essencearmory2.knowledge.zombieThinking=Zombie thinking

@@ -34,18 +34,27 @@ public class TEBrainExtractor extends TileEntity implements ITickable
 				item.setPosition(center.xCoord, center.yCoord + 0.5, center.zCoord);
 				if (currentEntity instanceof EntityZombie)
 				{
-					item.setEntityItemStack(new ItemStack(Items.ROTTEN_FLESH));
-					worldObj.spawnEntityInWorld(item);
+					if (!worldObj.isRemote)
+					{
+						item.setEntityItemStack(new ItemStack(Items.ROTTEN_FLESH));
+						worldObj.spawnEntityInWorld(item);
+					}
 				}
 				else if (currentEntity instanceof EntitySkeleton)
-				{
-					item.setEntityItemStack(new ItemStack(Items.BONE));
-					worldObj.spawnEntityInWorld(item);
-				}
+                {
+                    if (!worldObj.isRemote)
+                    {
+                        item.setEntityItemStack(new ItemStack(Items.BONE));
+                        worldObj.spawnEntityInWorld(item);
+                    }
+                }
 				else if (currentEntity instanceof EntityCreeper)
 				{
-					item.setEntityItemStack(new ItemStack(Items.GUNPOWDER));
-					worldObj.spawnEntityInWorld(item);
+					if (!worldObj.isRemote)
+					{
+						item.setEntityItemStack(new ItemStack(Items.GUNPOWDER));
+						worldObj.spawnEntityInWorld(item);
+					}
 				}
 			}
 			else operationProgress++;

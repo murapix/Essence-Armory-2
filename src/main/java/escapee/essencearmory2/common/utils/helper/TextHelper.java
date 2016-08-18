@@ -1,5 +1,8 @@
 package escapee.essencearmory2.common.utils.helper;
 
+import escapee.essencearmory2.MainRegistry;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Keyboard;
 
@@ -29,6 +32,11 @@ public class TextHelper {
      */
     public static String debugText(String text) {
         return BLUE + "[" + LIGHT_BLUE + "debug" + BLUE + "]" + END + ": " + text;
+    }
+
+    public static String localise(String text)
+    {
+        return I18n.format(text);
     }
 
     /**

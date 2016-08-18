@@ -16,7 +16,7 @@ public class EAPacketHandler
 
 	public static void register()
 	{
-
+		registerMessage(KnowledgeUpdateMessage.class,Side.CLIENT);
 	}
 
 	private static void registerMessage(Class clazz, Side side)
