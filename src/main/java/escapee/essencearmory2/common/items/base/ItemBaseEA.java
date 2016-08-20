@@ -18,91 +18,104 @@ import escapee.essencearmory2.common.utils.Util;
  */
 public class ItemBaseEA extends Item implements IItemVariantHolder<ItemBaseEA>
 {
-    private final String BASE_NAME;
-    private final String[] VARIANTS;
+	private final String[] VARIANTS;
 
-    public ItemBaseEA(String name, String ... variants) {
-        super();
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        setCreativeTab(Util.tabEssence);
-        setMaxStackSize(1);
-        setNoRepair();
+	public ItemBaseEA(String name, String... variants)
+	{
+		super();
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		setCreativeTab(Util.tabEssence);
+		setNoRepair();
 
-        BASE_NAME = name;
-        if (variants.length == 0) {
-            VARIANTS = new String[] { "normal" };
-        }
-        else {
-            VARIANTS = variants;
-        }
+		if (variants.length == 0)
+		{
+			VARIANTS = new String[] { "normal" };
+		}
+		else
+		{
+			setHasSubtypes(true);
+			VARIANTS = variants;
+		}
 
-        MainRegistry.itemRegistry.ITEMS.add(this);
-    }
+		MainRegistry.itemRegistry.ITEMS.add(this);
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
+	@Override
+	public String getUnlocalizedName(ItemStack itemStack)
+	{
 
-        if (hasSubtypes && itemStack.getMetadata() < VARIANTS.length) {
-            return String.format("item." + ":%s", VARIANTS[itemStack.getMetadata()]);
-        }
-        return super.getUnlocalizedName(itemStack);
-    }
+		if (hasSubtypes && itemStack.getMetadata() < VARIANTS.length) { return String.format("item." + "%s", VARIANTS[itemStack.getMetadata()]); }
+		return super.getUnlocalizedName(itemStack);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs creativeTab, List<ItemStack> list) {
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs creativeTab, List<ItemStack> list)
+	{
 
-        if (!getHasSubtypes()) {
-            super.getSubItems(item, creativeTab, list);
-        }
-        else {
-            for (int meta = 0; meta < VARIANTS.length; ++meta) {
-                list.add(new ItemStack(this, 1, meta));
-            }
-        }
-    }
+		if (!getHasSubtypes())
+		{
+			super.getSubItems(item, creativeTab, list);
+		}
+		else
+		{
+			for (int meta = 0; meta < VARIANTS.length; ++meta)
+			{
+				list.add(new ItemStack(this, 1, meta));
+			}
+		}
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void initModelsAndVariants() {
+	@SideOnly(Side.CLIENT)
+	public void initModelsAndVariants()
+	{
 
-        if (getCustomMeshDefinition() != null) {
+		if (getCustomMeshDefinition() != null)
+		{
 
-            ModelLoader.setCustomMeshDefinition(this, getCustomMeshDefinition());
-            for (int i = 0; i < VARIANTS.length; i++) {
-                ModelBakery.registerItemVariants(this, getCustomModelResourceLocation(VARIANTS[i]));
-            }
-        }
-        else {
-            if (!getHasSubtypes()) {
-                ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName().toString()));
-            }
-            else {
-                for (int i = 0; i < VARIANTS.length; i++) {
-                    ModelLoader.setCustomModelResourceLocation(this, i, getCustomModelResourceLocation(VARIANTS[i]));
-                }
-            }
-        }
-    }
+			ModelLoader.setCustomMeshDefinition(this, getCustomMeshDefinition());
+			for (int i = 0; i < VARIANTS.length; i++)
+			{
+				ModelBakery.registerItemVariants(this, getCustomModelResourceLocation(VARIANTS[i]));
+			}
+		}
+		else
+		{
+			if (!getHasSubtypes())
+			{
+				ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName().toString()));
+			}
+			else
+			{
+				for (int i = 0; i < VARIANTS.length; i++)
+				{
+					ModelLoader.setCustomModelResourceLocation(this, i, getCustomModelResourceLocation(VARIANTS[i]));
+				}
+			}
+		}
+	}
 
-    @Override
-    public ItemBaseEA getItem() {
-        return this;
-    }
+	@Override
+	public ItemBaseEA getItem()
+	{
+		return this;
+	}
 
+	@Override
+	public String[] getVariants()
+	{
+		return VARIANTS;
+	}
 
+	@Override
+	public ItemMeshDefinition getCustomMeshDefinition()
+	{
+		return null;
+	}
 
-    @Override
-    public String[] getVariants() {
-        return VARIANTS;
-    }
-
-    @Override
-    public ItemMeshDefinition getCustomMeshDefinition() {
-        return null;
-    }
-
-    protected ModelResourceLocation getCustomModelResourceLocation(String variant) {
-        return new ModelResourceLocation(variant);
-    }
+	protected ModelResourceLocation getCustomModelResourceLocation(String variant)
+	{
+		return new ModelResourceLocation(variant);
+	}
 }
