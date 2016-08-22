@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import escapee.essencearmory2.MainRegistry;
 import escapee.essencearmory2.common.utils.Util;
+import escapee.essencearmory2.init.BlockRegistry;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -25,7 +25,7 @@ public class BlockBaseEA extends Block
         setUnlocalizedName(name);
         setCreativeTab(Util.tabEssence);
 
-        MainRegistry.blockRegistry.BLOCKS.add(this);
+        BlockRegistry.BLOCKS.add(this);
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,10 +1,10 @@
 package escapee.essencearmory2.common.utils.handler;
 
-import escapee.essencearmory2.lib.LibMain;
+import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import java.io.File;
+import escapee.essencearmory2.lib.ModInfo;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -43,7 +43,7 @@ public class ConfigHandler
 		mobTrapSizeY2 = configuration.getInt("y_coord2", Configuration.CATEGORY_GENERAL, 0, 2, 16, "the second extension on z coord");
 		mobTrapSizeZ2 = configuration.getInt("z_coord2", Configuration.CATEGORY_GENERAL, 0, 0, 16, "the second extension on z coord");
 
-		if (event.getModID().equalsIgnoreCase(LibMain.ModInfo.MOD_ID))
+		if (event.getModID().equalsIgnoreCase(ModInfo.MOD_ID))
 		{
 			loadConfigs();
 		}

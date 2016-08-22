@@ -18,7 +18,8 @@ import escapee.essencearmory2.client.gui.screen.GuiResearchTablet;
 import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
-import escapee.essencearmory2.lib.LibMain;
+import escapee.essencearmory2.lib.MobKnowledge;
+import escapee.essencearmory2.lib.NBTTags;
 
 public class ItemMobBrain extends ItemBaseEA
 {
@@ -35,7 +36,7 @@ public class ItemMobBrain extends ItemBaseEA
 	{
 		super.onCreated(stack, world, player);
 		stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setString("knowledge", LibMain.LibKnowledge.getRandomKnowledge(mobClass));
+		stack.getTagCompound().setString(NBTTags.KNOWLEDGE_TAG, MobKnowledge.getRandomKnowledge(mobClass));
 	}
 
 	@Override
@@ -45,8 +46,8 @@ public class ItemMobBrain extends ItemBaseEA
 			tooltip.add("<Shift for details>");
 		if (!TextHelper.isShiftKeyDown())
 			return;
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("knowledge"))
-			tooltip.add(TextHelper.localise("essencearmory2.tooltip.knowledge")+ " " + TextHelper.PURPLE + TextHelper.localise("essencearmory2.knowledge." + stack.getTagCompound().getString("knowledge")));
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBTTags.KNOWLEDGE_TAG))
+			tooltip.add(TextHelper.localise("essencearmory2.tooltip.knowledge")+ " " + TextHelper.PURPLE + TextHelper.localise("essencearmory2.knowledge." + stack.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)));
 	}
 	
 	@Override
@@ -54,9 +55,9 @@ public class ItemMobBrain extends ItemBaseEA
 	{
 		if (player.hasCapability(KnowledgeProvider.KnowlageCapability, null) && item.hasTagCompound())
 		{
-			if (world.isRemote && !KnowledgeProvider.get(player).hasKnowledge(item.getTagCompound().getString("knowledge")))
+			if (world.isRemote && !KnowledgeProvider.get(player).hasKnowledge(item.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)))
 			{
-				KnowledgeProvider.get(player).addKnowledge(player, item.getTagCompound().getString("knowledge"));
+				KnowledgeProvider.get(player).addKnowledge(player, item.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG));
 				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND: EntityEquipmentSlot.OFFHAND, null);
 				return new ActionResult<>(EnumActionResult.SUCCESS, item);
 			}
@@ -80,7 +81,7 @@ public class ItemMobBrain extends ItemBaseEA
 	{
 		if (!item.hasTagCompound())
 			item.setTagCompound(new NBTTagCompound());
-		if (!item.getTagCompound().hasKey("knowledge"))
-			item.getTagCompound().setString("knowledge", LibMain.LibKnowledge.getRandomKnowledge(mobClass));
+		if (!item.getTagCompound().hasKey(NBTTags.KNOWLEDGE_TAG))
+			item.getTagCompound().setString(NBTTags.KNOWLEDGE_TAG, MobKnowledge.getRandomKnowledge(mobClass));
 	}
 }

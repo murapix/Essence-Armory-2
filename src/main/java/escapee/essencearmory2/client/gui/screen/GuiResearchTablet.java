@@ -1,13 +1,11 @@
 package escapee.essencearmory2.client.gui.screen;
 
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
-import escapee.essencearmory2.common.utils.helper.TextHelper;
-import escapee.essencearmory2.lib.LibMain;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
-import org.w3c.dom.Text;
+import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
+import escapee.essencearmory2.common.utils.helper.TextHelper;
+import escapee.essencearmory2.lib.ModResourceLocations;
 
 /**
  * Created by SirShadow on 18. 08. 2016.
@@ -40,7 +38,7 @@ public class GuiResearchTablet extends GuiScreen
 
     public void drawBackground()
     {
-        mc.renderEngine.bindTexture(LibMain.ModResourceLocations.SIMPLE_GUI);
+        mc.renderEngine.bindTexture(ModResourceLocations.SIMPLE_GUI);
         GL11.glPushMatrix();
         GL11.glColor4f(0,0,0,10f);
         GL11.glPopMatrix();

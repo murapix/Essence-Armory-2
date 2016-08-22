@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import escapee.essencearmory2.MainRegistry;
 import escapee.essencearmory2.common.utils.Util;
+import escapee.essencearmory2.init.ItemRegistry;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -38,7 +38,7 @@ public class ItemBaseEA extends Item implements IItemVariantHolder<ItemBaseEA>
 			VARIANTS = variants;
 		}
 
-		MainRegistry.itemRegistry.ITEMS.add(this);
+		ItemRegistry.ITEMS.add(this);
 	}
 
 	@Override
