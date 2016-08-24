@@ -4,4 +4,6 @@ item.ingotInfused.name=Infused Ingot
 
 essencearmory2.tooltip.knowledge=Research:
 
-essencearmory2.knowledge.zombieThinking=Zombie thinking
+essencearmory2.knowledge.=No Research Available
+essencearmory2.knowledge.zombieThinking=Zombie Thinking
+essencearmory2.knowledge.zombieMovement=Zombie Movement

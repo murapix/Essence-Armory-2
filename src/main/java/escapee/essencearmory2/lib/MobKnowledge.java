@@ -39,17 +39,69 @@ public class MobKnowledge
 	@SuppressWarnings("unchecked")
 	public static void init()
 	{
-		validKnowledge.put(EntityEnderman.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntitySpider.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityPigZombie.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityBlaze.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityCreeper.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityEndermite.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityGuardian.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntitySilverfish.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntitySkeleton.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntitySlime.class, Arrays.asList(new String[]{""}));
-		validKnowledge.put(EntityZombie.class, Arrays.asList(new String[]{"zombieThinking"}));
+		validKnowledge.put(EntityEnderman.class, Arrays.asList(new String[]
+				{"EndermanAggression",
+				"EndermanTeleportation",
+				"EndermanMovement",
+				"EndermanBlockPicking"}
+		));
+		validKnowledge.put(EntitySpider.class, Arrays.asList(new String[]
+				{"SpiderAggression",
+				"SpiderMovement",
+				"SpiderClimbing",
+				"SpiderWebbing"}
+		));
+		validKnowledge.put(EntityPigZombie.class, Arrays.asList(new String[]
+				{"PigZombieAggression",
+				"PigZombieMovement",
+				"PigZombieHorde",
+				"PigZombieItemUsage"}
+		));
+		validKnowledge.put(EntityBlaze.class, Arrays.asList(new String[]
+				{"BlazeAggression",
+				"BlazeFlight",
+				"BlazeFireballs",
+				"BlazeAim"}
+		));
+		validKnowledge.put(EntityCreeper.class, Arrays.asList(new String[]
+				{"CreeperAggression",
+				"CreeperExplosion",
+				"CreeperMovement",
+				"CreeperFleeing"}
+		));
+		validKnowledge.put(EntityEndermite.class, Arrays.asList(new String[]
+				{"EndermiteAggression",
+				"EndermiteMovement"}
+		));
+		validKnowledge.put(EntityGuardian.class, Arrays.asList(new String[]
+				{"GuardianAggression",
+				"GuardianMovement",
+				"GuardianFleeing",
+				"GuardianLaser"}
+		));
+		validKnowledge.put(EntitySilverfish.class, Arrays.asList(new String[]
+				{"SilverfishAggresion",
+				"SilverfishMovement",
+				"SilverfishSwarming",
+				"SilverfishDigging"}
+		));
+		validKnowledge.put(EntitySkeleton.class, Arrays.asList(new String[]
+				{"SkeletonAggression",
+				"SkeletonAim",
+				"SkeletonMovement",
+				"SkeletonItemUsage"}
+		));
+		validKnowledge.put(EntitySlime.class, Arrays.asList(new String[]
+				{"SlimeAggression",
+				"SlimeJumping",
+				"SlimeSplitting"}
+		));
+		validKnowledge.put(EntityZombie.class, Arrays.asList(new String[]
+				{"ZombieAggression",
+				"ZombieWalking",
+				"ZombieJumping",
+				"ZombieTargeting"}
+		));
 	}
 	
 	public static String getKnowledge(Class<? extends IMob> entityClass, int index)
