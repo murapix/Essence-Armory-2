@@ -1,7 +1,7 @@
 package escapee.essencearmory2.common.network;
 
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeCapabilityStorage;
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
+import escapee.essencearmory2.common.capability.knowledge.KnowledgeCapabilityStorage;
+import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;

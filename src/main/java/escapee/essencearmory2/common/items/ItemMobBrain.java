@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import escapee.essencearmory2.client.gui.screen.GuiResearchTablet;
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
+import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
 import escapee.essencearmory2.lib.MobKnowledge;

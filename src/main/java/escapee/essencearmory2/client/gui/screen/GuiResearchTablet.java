@@ -3,7 +3,7 @@ package escapee.essencearmory2.client.gui.screen;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
-import escapee.essencearmory2.common.capability.knowlage.KnowledgeProvider;
+import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
 import escapee.essencearmory2.lib.ModResourceLocations;
 

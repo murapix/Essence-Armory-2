@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import escapee.essencearmory2.common.items.ItemIngot;
 import escapee.essencearmory2.common.items.ItemMobBrain;
+import escapee.essencearmory2.common.items.ItemResearchLog;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
 
 public class ItemRegistry
@@ -22,6 +23,9 @@ public class ItemRegistry
 	public static final ArrayList<ItemBaseEA> ITEMS = new ArrayList<ItemBaseEA>();
 
 	public static ItemBaseEA itemInfusedIngot = new ItemIngot("ingotInfused");
+	
+	public static ItemBaseEA itemResearchLog = new ItemResearchLog("researchLog");
+	
 	public static ItemBaseEA endermanBrain = new ItemMobBrain(EntityEnderman.class, "endermanBrain");
 	public static ItemBaseEA spiderBrain = new ItemMobBrain(EntitySpider.class, "spiderBrain");
 	public static ItemBaseEA pigZombieBrain = new ItemMobBrain(EntityPigZombie.class, "pigZombieBrain");

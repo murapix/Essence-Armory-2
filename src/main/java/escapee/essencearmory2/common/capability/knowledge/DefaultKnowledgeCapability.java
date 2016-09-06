@@ -1,12 +1,13 @@
-package escapee.essencearmory2.common.capability.knowlage;
+package escapee.essencearmory2.common.capability.knowledge;
 
-import escapee.essencearmory2.common.network.EAPacketHandler;
-import escapee.essencearmory2.common.network.KnowledgeUpdateMessage;
+import java.util.ArrayList;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-
-import java.util.ArrayList;
+import escapee.essencearmory2.common.network.EAPacketHandler;
+import escapee.essencearmory2.common.network.KnowledgeUpdateMessage;
+import escapee.essencearmory2.lib.MobKnowledge;
 
 /**
  * Created by SirShadow on 18. 08. 2016.
@@ -33,6 +34,12 @@ public class DefaultKnowledgeCapability implements IKnowledgeCapability
             }
         }
         return false;
+    }
+    
+    @Override
+    public boolean hasKnowledge(Class<? extends IMob> cls)
+    {
+    	return knowledge.containsAll(MobKnowledge.validKnowledge.get(cls));
     }
 
     @Override

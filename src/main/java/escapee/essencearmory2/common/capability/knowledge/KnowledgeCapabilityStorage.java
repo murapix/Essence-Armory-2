@@ -1,4 +1,4 @@
-package escapee.essencearmory2.common.capability.knowlage;
+package escapee.essencearmory2.common.capability.knowledge;
 
 import java.util.ArrayList;
 import net.minecraft.nbt.NBTBase;
