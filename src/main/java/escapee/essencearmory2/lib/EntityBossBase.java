@@ -55,7 +55,7 @@ public abstract class EntityBossBase extends EntityMob
 	}
 
 	@Override
-	public void dropFewItems(boolean b, int i)
+	public void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
 	{
 
 	}

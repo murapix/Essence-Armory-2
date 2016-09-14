@@ -12,6 +12,7 @@ import escapee.essencearmory2.common.capability.EACapabilityManeger;
 import escapee.essencearmory2.common.network.EAPacketHandler;
 import escapee.essencearmory2.common.upgrade.UpgradeRegistry;
 import escapee.essencearmory2.common.utils.handler.ConfigHandler;
+import escapee.essencearmory2.init.EAEntityRegistry;
 import escapee.essencearmory2.init.MainRegistry;
 import escapee.essencearmory2.lib.MobKnowledge;
 
@@ -42,6 +43,7 @@ public abstract class CommonProxy implements IProxy
     public void onInit(FMLInitializationEvent event)
     {
         register();
+        EAEntityRegistry.registerEntities();
     }
 
     @Override
