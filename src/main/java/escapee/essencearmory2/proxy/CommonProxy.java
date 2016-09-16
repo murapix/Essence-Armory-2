@@ -21,44 +21,45 @@ import escapee.essencearmory2.lib.MobKnowledge;
  */
 public abstract class CommonProxy implements IProxy
 {
-    @Override
-    public void onServerStart(FMLServerStartingEvent event)
-    {
+	@Override
+	public void onServerStart(FMLServerStartingEvent event)
+	{
 
-    }
+	}
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event)
-    {
-        ConfigHandler.init(event.getSuggestedConfigurationFile());
-        eventRegistry();
-        MainRegistry.register();
-        EAPacketHandler.register();
-        EACapabilityManeger.registerCapability();
-        UpgradeRegistry.init();
-        MobKnowledge.init();
-    }
+	@Override
+	public void onPreInit(FMLPreInitializationEvent event)
+	{
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		eventRegistry();
+		MainRegistry.register();
+		EAPacketHandler.register();
+		EACapabilityManeger.registerCapability();
+		UpgradeRegistry.init();
+		MobKnowledge.init();
+	}
 
-    @Override
-    public void onInit(FMLInitializationEvent event)
-    {
-        register();
-        EAEntityRegistry.registerEntities();
-    }
+	@Override
+	public void onInit(FMLInitializationEvent event)
+	{
+		register();
+		EAEntityRegistry.registerEntities();
+	}
 
-    @Override
-    public void onPostInit(FMLPostInitializationEvent event) {
+	@Override
+	public void onPostInit(FMLPostInitializationEvent event)
+	{
 
-    }
+	}
 
-    private void eventRegistry()
-    {
-        MinecraftForge.EVENT_BUS.register(new ConfigHandler());
-        MinecraftForge.EVENT_BUS.register(new EACapabilityManeger());
-    }
+	private void eventRegistry()
+	{
+		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
+		MinecraftForge.EVENT_BUS.register(new EACapabilityManeger());
+	}
 
-    private void register()
-    {
-        NetworkRegistry.INSTANCE.registerGuiHandler(EssenceArmory.instance,new GuiHandler());
-    }
+	private void register()
+	{
+		NetworkRegistry.INSTANCE.registerGuiHandler(EssenceArmory.instance, new GuiHandler());
+	}
 }

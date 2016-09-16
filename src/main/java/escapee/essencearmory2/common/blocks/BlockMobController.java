@@ -10,11 +10,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import escapee.essencearmory2.EssenceArmory;
 import escapee.essencearmory2.common.blocks.base.TEBlockEA;
-import escapee.essencearmory2.common.tile.TEChipCreator;
+import escapee.essencearmory2.common.tile.TEMobController;
 
-public class BlockChipCreator extends TEBlockEA
+public class BlockMobController extends TEBlockEA
 {
-	public BlockChipCreator(String name)
+	public BlockMobController(String name)
 	{
 		super(name);
 	}
@@ -22,16 +22,17 @@ public class BlockChipCreator extends TEBlockEA
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TEChipCreator();
+		return new TEMobController();
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack stack, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (world.isRemote) return true;
+		if (world.isRemote) return true; 
 		TileEntity te = world.getTileEntity(pos);
-		if (!(te instanceof TEChipCreator)) return false;
-		player.openGui(EssenceArmory.instance, 1, world, pos.getX(), pos.getY(), pos.getZ());
+		if (!(te instanceof TEMobController)) return false;
+		// TODO: Add GUI classes and ids
+		player.openGui(EssenceArmory.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 }
