@@ -5,11 +5,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import escapee.essencearmory2.common.blocks.BlockBrainExtractor;
 import escapee.essencearmory2.common.blocks.BlockChipCreator;
+import escapee.essencearmory2.common.blocks.BlockMobController;
 import escapee.essencearmory2.common.blocks.BlockMobTrap;
 import escapee.essencearmory2.common.blocks.base.BlockBaseEA;
 import escapee.essencearmory2.common.blocks.base.TEBlockEA;
 import escapee.essencearmory2.common.tile.TEBrainExtractor;
 import escapee.essencearmory2.common.tile.TEChipCreator;
+import escapee.essencearmory2.common.tile.TEMobController;
 import escapee.essencearmory2.common.tile.TEMobTrap;
 import escapee.essencearmory2.lib.LibUtils;
 
@@ -20,6 +22,7 @@ public class BlockRegistry
 	public static TEBlockEA blockMobTrap = new BlockMobTrap("blockMobTrap");
 	public static TEBlockEA blockBrainExtractor = new BlockBrainExtractor("blockBrainExtractor");
 	public static TEBlockEA blockChipCreator = new BlockChipCreator("blockChipCreator");
+	public static TEBlockEA blockMobController = new BlockMobController("blockMobController");
 
 	public static void registerBlocks()
 	{
@@ -43,5 +46,6 @@ public class BlockRegistry
 		GameRegistry.registerTileEntityWithAlternatives(TEMobTrap.class, LibUtils.customTileName("mobtrap"));
 		GameRegistry.registerTileEntityWithAlternatives(TEBrainExtractor.class, LibUtils.customTileName("brainextractor"));
 		GameRegistry.registerTileEntityWithAlternatives(TEChipCreator.class, LibUtils.customTileName("chipcreator"));
+		GameRegistry.registerTileEntityWithAlternatives(TEMobController.class, LibUtils.customTileName("mobController"));
 	}
 }

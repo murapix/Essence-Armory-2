@@ -1,5 +1,7 @@
 package escapee.essencearmory2.init;
 
+import net.minecraftforge.common.MinecraftForge;
+import escapee.essencearmory2.common.event.EventHandler;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
 
 /**
@@ -30,5 +32,7 @@ public class MainRegistry
 		TextHelper.addColorsAndComponents();
 
 		RecipeRegistry.registerRecipes();
+		
+		MinecraftForge.EVENT_BUS.register(EventHandler.INSTANCE);
 	}
 }
