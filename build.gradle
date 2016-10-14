@@ -14,10 +14,12 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-
 version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
-group= mod_group 
+group = mod_group 
 archivesBaseName = mod_artifact_basename
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 minecraft {
     version = minecraft_version + "-" + forge_version
@@ -26,11 +28,16 @@ minecraft {
     mappings = mcp_mappings_version
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    maven { url "http://dvs1.progwml6.com/files/maven" }
+}
 
 dependencies {
-
+    compile 'com.github.TeamWizardry:LibrarianLib:-SNAPSHOT'
+    deobfCompile "mezz.jei:jei_1.10.2:3.10.0.261:api"
+    runtime "mezz.jei:jei_1.10.2:3.10.0.261"
 }
 
 processResources
