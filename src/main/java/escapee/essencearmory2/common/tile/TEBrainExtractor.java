@@ -26,7 +26,6 @@ import net.minecraft.util.math.Vec3d;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import escapee.essencearmory2.init.ItemRegistry;
-import escapee.essencearmory2.lib.MobKnowledge;
 
 public class TEBrainExtractor extends TileEntity implements ITickable
 {
@@ -38,9 +37,7 @@ public class TEBrainExtractor extends TileEntity implements ITickable
 	{
 		public boolean apply(@Nullable Entity entity)
 		{
-			if (entity instanceof IMob)
-				return MobKnowledge.isValidEntityClass(((IMob) entity).getClass());
-			return false;
+			return true;
 		}
 	};
 
@@ -61,8 +58,6 @@ public class TEBrainExtractor extends TileEntity implements ITickable
 					EntityItem item = new EntityItem(worldObj);
 					item.setPosition(center.xCoord, center.yCoord + 0.5, center.zCoord);
 					Class<? extends IMob> entityClass = currentEntity.getClass();
-					if (!MobKnowledge.isValidEntityClass(entityClass))
-						return;
 
 					if (entityClass == EntityEnderman.class)
 					{

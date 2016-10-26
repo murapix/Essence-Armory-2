@@ -17,7 +17,8 @@ public class RenderHelper
         return (width - fontRenderer.getStringWidth(string)) / 2;
     }
 
-    private static double getPulseValue() {
+    @SuppressWarnings("unused")
+	private static double getPulseValue() {
         return (Math.sin(System.nanoTime() / 100f) + 1) / 2;
     }
 }

@@ -19,6 +19,7 @@ public class EAPacketHandler
 		registerMessage(KnowledgeUpdateMessage.class,Side.CLIENT);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static void registerMessage(Class clazz, Side side)
 	{
 		INSTANCE.registerMessage(clazz, clazz, id++, side);

@@ -1,11 +1,9 @@
 package escapee.essencearmory2.common.utils.helper;
 
-import escapee.essencearmory2.init.MainRegistry;
+import java.util.ArrayList;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Keyboard;
-import java.util.ArrayList;
 
 /**
  * Created by SirShadow on 14.8.2016.

@@ -1,7 +1,5 @@
 package escapee.essencearmory2.common.network;
 
-import escapee.essencearmory2.common.capability.knowledge.KnowledgeCapabilityStorage;
-import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +9,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 
 /**
  * Created by SirShadow on 18. 08. 2016.

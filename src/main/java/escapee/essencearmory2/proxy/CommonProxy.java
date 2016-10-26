@@ -14,7 +14,6 @@ import escapee.essencearmory2.common.upgrade.UpgradeRegistry;
 import escapee.essencearmory2.common.utils.handler.ConfigHandler;
 import escapee.essencearmory2.init.EAEntityRegistry;
 import escapee.essencearmory2.init.MainRegistry;
-import escapee.essencearmory2.lib.MobKnowledge;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -36,7 +35,6 @@ public abstract class CommonProxy implements IProxy
 		EAPacketHandler.register();
 		EACapabilityManeger.registerCapability();
 		UpgradeRegistry.init();
-		MobKnowledge.init();
 	}
 
 	@Override

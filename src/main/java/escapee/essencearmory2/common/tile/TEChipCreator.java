@@ -1,6 +1,5 @@
 package escapee.essencearmory2.common.tile;
 
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +10,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import escapee.essencearmory2.common.utils.Util;
 import escapee.essencearmory2.lib.NBTTags;
 
@@ -57,8 +55,8 @@ public class TEChipCreator extends TileEntity implements ITickable
 				itemStackHandler.setStackInSlot(RESEARCH_SLOT, null);
 				return;
 			}
-			if (KnowledgeProvider.get(player).hasKnowledge(EntityZombie.class))
-			{
+//			if (KnowledgeProvider.get(player).hasKnowledge(EntityZombie.class))
+//			{
 				if (operationProgress >= OPERATION_TIME)
 				{
 					operationProgress = 0;
@@ -68,7 +66,7 @@ public class TEChipCreator extends TileEntity implements ITickable
 				{
 					operationProgress++;
 				}
-			}
+//			}
 		}
 	}
 

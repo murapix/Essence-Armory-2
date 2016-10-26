@@ -1,24 +1,23 @@
 package escapee.essencearmory2.common.capability.knowledge;
 
 import java.util.ArrayList;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import escapee.essencearmory2.common.network.EAPacketHandler;
 import escapee.essencearmory2.common.network.KnowledgeUpdateMessage;
-import escapee.essencearmory2.lib.MobKnowledge;
+import escapee.essencearmory2.common.research.ResearchBase;
+import escapee.essencearmory2.common.research.ResearchNetwork;
 
 /**
  * Created by SirShadow on 18. 08. 2016.
  */
 public class DefaultKnowledgeCapability implements IKnowledgeCapability
 {
-
-    public ArrayList<String> knowledge = new ArrayList<>();
+    public ArrayList<ResearchBase> knowledge = new ArrayList<>();
 
     @Override
-    public ArrayList<String> getKnowledge()
+    public ArrayList<ResearchBase> getKnowledge()
     {
         return knowledge;
     }
@@ -37,15 +36,15 @@ public class DefaultKnowledgeCapability implements IKnowledgeCapability
     }
     
     @Override
-    public boolean hasKnowledge(Class<? extends IMob> cls)
+    public boolean hasPrerequisites(String name)
     {
-    	return knowledge.containsAll(MobKnowledge.validKnowledge.get(cls));
+    	return knowledge.containsAll(ResearchNetwork.getPrerequisites(name));
     }
 
     @Override
     public void addKnowledge(EntityPlayer player, String name)
     {
-        knowledge.add(name);
+        knowledge.add(ResearchNetwork.getResearch(name));
         if(player != null)
         {
             dataChanged(player);
@@ -74,7 +73,7 @@ public class DefaultKnowledgeCapability implements IKnowledgeCapability
     }
 
     @Override
-    public void setKnowledge(ArrayList<String> knowledge)
+    public void setKnowledge(ArrayList<ResearchBase> knowledge)
     {
         this.knowledge = knowledge;
     }

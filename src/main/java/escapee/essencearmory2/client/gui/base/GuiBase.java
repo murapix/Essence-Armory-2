@@ -18,8 +18,8 @@ public class GuiBase extends GuiContainer
     @SideOnly(Side.CLIENT)
     ResourceLocation location;
     String title;
-    private boolean drawTitle = true;
-
+    @SuppressWarnings("unused")
+	private boolean drawTitle;
 
     public GuiBase(String title,Container container,ResourceLocation location)
     {

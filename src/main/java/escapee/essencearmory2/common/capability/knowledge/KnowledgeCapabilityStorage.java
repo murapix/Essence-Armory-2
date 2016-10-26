@@ -9,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.Constants;
+import escapee.essencearmory2.common.research.ResearchBase;
+import escapee.essencearmory2.common.research.ResearchNetwork;
 import escapee.essencearmory2.lib.NBTTags;
 
 /**
@@ -24,9 +26,9 @@ public class KnowledgeCapabilityStorage implements IStorage<IKnowledgeCapability
     {
         NBTTagCompound tagCompound = new NBTTagCompound();
         NBTTagList list = new NBTTagList();
-        ArrayList<String> knowledge = instance.getKnowledge();
+        ArrayList<ResearchBase> knowledge = instance.getKnowledge();
         for (int i = 0; i < knowledge.size(); i ++){
-            list.appendTag(new NBTTagString(knowledge.get(i)));
+            list.appendTag(new NBTTagString(knowledge.get(i).getName()));
         }
         tagCompound.setTag(NBTTags.KNOWLEDGE_TAG, list);
         return tagCompound;
@@ -37,9 +39,9 @@ public class KnowledgeCapabilityStorage implements IStorage<IKnowledgeCapability
     {
         NBTTagCompound tag =(NBTTagCompound)nbt;
         NBTTagList list = tag.getTagList(NBTTags.KNOWLEDGE_TAG, Constants.NBT.TAG_STRING);
-        ArrayList<String> knowledge = new ArrayList<String>();
+        ArrayList<ResearchBase> knowledge = new ArrayList<>();
         for (int i = 0; i < list.tagCount(); i ++){
-            knowledge.add(list.getStringTagAt(i));
+            knowledge.add(ResearchNetwork.getResearch(list.getStringTagAt(i)));
         }
         instance.setKnowledge(knowledge);
     }

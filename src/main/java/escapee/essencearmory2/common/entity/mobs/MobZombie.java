@@ -5,8 +5,6 @@ import net.minecraft.world.World;
 
 public class MobZombie extends MobBase
 {
-//	private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.<Boolean>createKey(MobZombie.class, DataSerializers.BOOLEAN);
-	
 	public MobZombie(World world)
 	{
 		super(world);

@@ -1,9 +1,10 @@
 package escapee.essencearmory2.common.items;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -17,18 +18,23 @@ import net.minecraft.world.World;
 import escapee.essencearmory2.client.gui.screen.GuiResearchTablet;
 import escapee.essencearmory2.common.capability.knowledge.KnowledgeProvider;
 import escapee.essencearmory2.common.items.base.ItemBaseEA;
+import escapee.essencearmory2.common.research.BasicResearch;
 import escapee.essencearmory2.common.utils.helper.TextHelper;
-import escapee.essencearmory2.lib.MobKnowledge;
 import escapee.essencearmory2.lib.NBTTags;
 
 public class ItemMobBrain extends ItemBaseEA
 {
-	private Class<? extends IMob> mobClass;
-	
-	public ItemMobBrain(Class<? extends IMob> cls, String name)
+	private ArrayList<BasicResearch> research = new ArrayList<>();
+	private LinkedHashSet<BasicResearch> dupeTester = new LinkedHashSet<>();
+
+	public ItemMobBrain(String name)
 	{
 		super(name);
-		this.mobClass = cls;
+	}
+
+	public void addResearch(BasicResearch research)
+	{
+		if (dupeTester.add(research)) this.research.add(research);
 	}
 
 	@Override
@@ -36,7 +42,7 @@ public class ItemMobBrain extends ItemBaseEA
 	{
 		super.onCreated(stack, world, player);
 		stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setString(NBTTags.KNOWLEDGE_TAG, MobKnowledge.getRandomKnowledge(mobClass));
+		stack.getTagCompound().setString(NBTTags.KNOWLEDGE_TAG, research.get((int) (Math.random() * research.size())).getName());
 	}
 
 	@Override
@@ -47,9 +53,9 @@ public class ItemMobBrain extends ItemBaseEA
 		if (!TextHelper.isShiftKeyDown())
 			return;
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBTTags.KNOWLEDGE_TAG))
-			tooltip.add(TextHelper.localise("essencearmory2.tooltip.knowledge")+ " " + TextHelper.PURPLE + TextHelper.localise("essencearmory2.knowledge." + stack.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)));
+			tooltip.add(TextHelper.localise("essencearmory2.tooltip.knowledge") + " " + TextHelper.PURPLE + TextHelper.localise("essencearmory2.knowledge." + stack.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)));
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack item, World world, EntityPlayer player, EnumHand hand)
 	{
@@ -58,13 +64,13 @@ public class ItemMobBrain extends ItemBaseEA
 			if (world.isRemote && !KnowledgeProvider.get(player).hasKnowledge(item.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)))
 			{
 				KnowledgeProvider.get(player).addKnowledge(player, item.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG));
-				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND: EntityEquipmentSlot.OFFHAND, null);
+				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, null);
 				return new ActionResult<>(EnumActionResult.SUCCESS, item);
 			}
 		}
 		return new ActionResult<>(EnumActionResult.FAIL, item);
 	}
-	
+
 	@Override
 	public EnumActionResult onItemUse(ItemStack item, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
@@ -75,13 +81,11 @@ public class ItemMobBrain extends ItemBaseEA
 		}
 		return EnumActionResult.FAIL;
 	}
-	
+
 	@Override
 	public void onUpdate(ItemStack item, World world, Entity entity, int slot, boolean isSelected)
 	{
 		if (!item.hasTagCompound())
 			item.setTagCompound(new NBTTagCompound());
-		if (!item.getTagCompound().hasKey(NBTTags.KNOWLEDGE_TAG))
-			item.getTagCompound().setString(NBTTags.KNOWLEDGE_TAG, MobKnowledge.getRandomKnowledge(mobClass));
 	}
 }

@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class MobRanged extends MobBase
 {
-	private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(MobSkeleton.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(MobSkeleton.class, DataSerializers.BOOLEAN);
 	
 	public MobRanged(World world)
 	{

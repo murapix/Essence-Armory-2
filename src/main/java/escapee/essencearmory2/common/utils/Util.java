@@ -28,7 +28,7 @@ public class Util
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem()
 		{
-			return ItemRegistry.itemInfusedIngot;
+			return ItemRegistry.itemResearchLog;
 		}
 	};
 

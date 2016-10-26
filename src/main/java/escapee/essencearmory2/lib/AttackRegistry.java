@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 public class AttackRegistry
 {
-	public static HashMap<String, Class> attacks = new HashMap<String, Class>();
+	public static HashMap<String, Class<? extends BossAttack>> attacks = new HashMap<>();
 	
 	public static void init()
 	{
 	}
 
-	public static Constructor getAttack(String name)
+	public static Constructor<? extends BossAttack> getAttack(String name)
 	{
 		try
 		{

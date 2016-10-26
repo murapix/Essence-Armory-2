@@ -40,12 +40,9 @@ public class BlockRegistry
 
 	public static void tileEntityRegisty()
 	{
-		// example:
-		// GameRegistry.registerTileEntityWithAlternatives(TileEntityExample.class,
-		// LibUtils.customTileName("example"));
-		GameRegistry.registerTileEntityWithAlternatives(TEMobTrap.class, LibUtils.customTileName("mobtrap"));
-		GameRegistry.registerTileEntityWithAlternatives(TEBrainExtractor.class, LibUtils.customTileName("brainextractor"));
-		GameRegistry.registerTileEntityWithAlternatives(TEChipCreator.class, LibUtils.customTileName("chipcreator"));
-		GameRegistry.registerTileEntityWithAlternatives(TEMobController.class, LibUtils.customTileName("mobController"));
+		GameRegistry.registerTileEntity(TEMobTrap.class, LibUtils.customTileName("mobtrap"));
+		GameRegistry.registerTileEntity(TEBrainExtractor.class, LibUtils.customTileName("brainextractor"));
+		GameRegistry.registerTileEntity(TEChipCreator.class, LibUtils.customTileName("chipcreator"));
+		GameRegistry.registerTileEntity(TEMobController.class, LibUtils.customTileName("mobController"));
 	}
 }

@@ -8,7 +8,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import escapee.essencearmory2.EssenceArmory;
 import escapee.essencearmory2.common.entity.end.EntityEndBoss;
 import escapee.essencearmory2.common.entity.end.RenderEndBoss;
+import escapee.essencearmory2.common.entity.mobs.MobSkeleton;
 import escapee.essencearmory2.common.entity.mobs.MobZombie;
+import escapee.essencearmory2.common.entity.render.RenderSkeleton;
 import escapee.essencearmory2.common.entity.render.RenderZombie;
 
 public class EAEntityRegistry
@@ -19,11 +21,13 @@ public class EAEntityRegistry
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndBoss.class, new RenderEndBoss());
 		RenderingRegistry.registerEntityRenderingHandler(MobZombie.class, new RenderZombie());
+		RenderingRegistry.registerEntityRenderingHandler(MobSkeleton.class, new RenderSkeleton());
 	}
 	
 	public static void registerEntities()
 	{
 		EntityRegistry.registerModEntity(EntityEndBoss.class, "endBoss", 0, EssenceArmory.instance, 64, 3, true, Color.MAGENTA.getRGB(), Color.PINK.getRGB());
-		EntityRegistry.registerModEntity(MobZombie.class, "mobZombie", 1, EssenceArmory.instance, 64, 3, true, Color.green.getRGB(), Color.MAGENTA.getRGB());
+		EntityRegistry.registerModEntity(MobZombie.class, "mobZombie", 1, EssenceArmory.instance, 64, 3, true, Color.GREEN.getRGB(), Color.MAGENTA.getRGB());
+		EntityRegistry.registerModEntity(MobSkeleton.class, "mobSkeleton", 2, EssenceArmory.instance, 64, 3, true, Color.GRAY.getRGB(), Color.MAGENTA.getRGB());
 	}
 }
