@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "inhumanresources:blocks/mob_trap_top",
+		"side": "inhumanresources:blocks/mob_trap_side"
+	}
+}

@@ -1,0 +1,9 @@
+itemGroup.inhumanresources=Inhuman Resources
+
+item.ingotInfused.name=Infused Ingot
+
+inhumanresources.tooltip.knowledge=Research:
+
+inhumanresources.knowledge.=No Research Available
+inhumanresources.knowledge.zombieThinking=Zombie Thinking
+inhumanresources.knowledge.zombieMovement=Zombie Movement
