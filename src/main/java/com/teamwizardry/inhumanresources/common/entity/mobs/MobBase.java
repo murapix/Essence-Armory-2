@@ -53,9 +53,9 @@ public class MobBase extends EntityCreature implements IEntityOwnable
 	protected void initEntityAI()
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(6, new MobAIGetNextTarget(this, 1));
-		this.tasks.addTask(7, new MobAIFollowOwner(this, 1, 4, 32));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 32));
+		this.targetTasks.addTask(6, new MobAIGetNextTarget(this, 1));
+		this.targetTasks.addTask(7, new MobAIFollowOwner(this, 1, 4, 32));
+		this.targetTasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 32));
 	}
 	
 	public void setControllerPos(BlockPos pos)

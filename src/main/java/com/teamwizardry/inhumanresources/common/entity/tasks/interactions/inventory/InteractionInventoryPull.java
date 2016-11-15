@@ -50,7 +50,7 @@ public class InteractionInventoryPull implements InteractionInventory
 			{
 				for (ItemStack stack : itemList)
 				{
-					if (ItemStack.areItemsEqual(item, stack))
+					if (ItemStack.areItemsEqual(item, stack) && ItemStack.areItemStackTagsEqual(item, stack))
 					{
 						itemMatched = true;
 						refStackSize = stack.stackSize;
@@ -63,7 +63,7 @@ public class InteractionInventoryPull implements InteractionInventory
 			{
 				for (ItemStack stack : itemList)
 				{
-					if (ItemStack.areItemsEqual(item, stack))
+					if (ItemStack.areItemsEqual(item, stack) && ItemStack.areItemStackTagsEqual(item, stack))
 					{
 						itemMatched = true;
 						break;
@@ -80,7 +80,7 @@ public class InteractionInventoryPull implements InteractionInventory
 				
 				int transferableAmount = 0;
 
-				if (items[j] != null && items[j].getItem() != null && items[j].stackSize != 0 && !ItemStack.areItemsEqual(item, items[j]))
+				if (items[j] != null && items[j].getItem() != null && items[j].stackSize != 0 && !(ItemStack.areItemsEqual(item, items[j]) && ItemStack.areItemStackTagsEqual(item, items[j])))
 					continue;
 				
 				if (items[j] == null)
@@ -118,6 +118,7 @@ public class InteractionInventoryPull implements InteractionInventory
 					items[j].stackSize = items[j].getMaxStackSize();
 			}
 		}
+		this.setShouldCycle(true);
 		return items;
 	}
 

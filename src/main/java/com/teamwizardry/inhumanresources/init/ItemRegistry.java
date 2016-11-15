@@ -1,24 +1,32 @@
 package com.teamwizardry.inhumanresources.init;
 
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
+import com.teamwizardry.inhumanresources.common.items.ItemMistwroughtSword;
 import com.teamwizardry.inhumanresources.common.items.ItemMobBrain;
 import com.teamwizardry.inhumanresources.common.items.ItemResearchLog;
-import com.teamwizardry.inhumanresources.common.items.base.ItemBaseEA;
+import com.teamwizardry.librarianlib.common.base.item.ItemMod;
+import com.teamwizardry.librarianlib.common.base.item.ItemModSword;
 
 public class ItemRegistry
 {
-	public static ItemBaseEA itemResearchLog;
+	public static ToolMaterial mistwrought = EnumHelper.addToolMaterial("mistwrought", 4, 5000, 10, 6, 0);
 	
-	public static ItemBaseEA endermanBrain;
-	public static ItemBaseEA spiderBrain;
-	public static ItemBaseEA pigZombieBrain;
-	public static ItemBaseEA blazeBrain;
-	public static ItemBaseEA creeperBrain;
-	public static ItemBaseEA endermiteBrain;
-	public static ItemBaseEA guardianBrain;
-	public static ItemBaseEA silverfishBrain;
-	public static ItemBaseEA skeletonBrain;
-	public static ItemBaseEA slimeBrain;
-	public static ItemBaseEA zombieBrain;
+	public static ItemMod itemResearchLog;
+	
+	public static ItemMod endermanBrain;
+	public static ItemMod spiderBrain;
+	public static ItemMod pigZombieBrain;
+	public static ItemMod blazeBrain;
+	public static ItemMod creeperBrain;
+	public static ItemMod endermiteBrain;
+	public static ItemMod guardianBrain;
+	public static ItemMod silverfishBrain;
+	public static ItemMod skeletonBrain;
+	public static ItemMod slimeBrain;
+	public static ItemMod zombieBrain;
+	
+	public static ItemModSword mistwroughtSword; 
 
 	public static void init()
 	{
@@ -35,5 +43,6 @@ public class ItemRegistry
 		slimeBrain = new ItemMobBrain("slimeBrain");
 		zombieBrain = new ItemMobBrain("zombieBrain");
 
+		mistwroughtSword = new ItemMistwroughtSword("mistwroughtSword", mistwrought);
 	}
 }

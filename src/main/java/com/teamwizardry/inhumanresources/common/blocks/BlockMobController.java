@@ -3,14 +3,6 @@ package com.teamwizardry.inhumanresources.common.blocks;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
-import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
-import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
-import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.IInteraction;
-import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.EnumBehavior;
-import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPull;
-import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPush;
-import com.teamwizardry.inhumanresources.common.tile.TEMobController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,6 +12,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
+import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
+import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
+import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.IInteraction;
+import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.EnumBehavior;
+import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPull;
+import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPush;
+import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.movement.InteractionPatrol;
+import com.teamwizardry.inhumanresources.common.tile.TEMobController;
 
 public class BlockMobController extends TEBlockEA
 {
@@ -45,13 +46,20 @@ public class BlockMobController extends TEBlockEA
 		Queue<IInteraction> queue = new LinkedList<>();
 		queue.add(new InteractionInventoryPull(controller.getPos().add(2, 0, 0), false, EnumBehavior.ANY_AMOUNT));
 		queue.add(new InteractionInventoryPush(controller.getPos().add(-2, 0, 0), false, EnumBehavior.ANY_AMOUNT));
-		Task task = new Task(queue);
+		controller.addTask(new Task(queue));
+		queue = new LinkedList<>();
+		queue.add(new InteractionInventoryPull(controller.getPos().add(-2, 0, 0), false, EnumBehavior.ANY_AMOUNT));
+		queue.add(new InteractionInventoryPush(controller.getPos().add(2, 0, 0), false, EnumBehavior.ANY_AMOUNT));
+		controller.addTask(new Task(queue));
+		queue = new LinkedList<>();
+		queue.add(new InteractionPatrol(controller.getPos().add(5, 0, 5), controller.getPos().add(5, 0, -5), controller.getPos().add(-5, 0, -5), controller.getPos().add(-5, 0, 5)));
+		controller.addTask(new Task(queue));
+		queue = new LinkedList<>();
+		queue.add(new InteractionPatrol(controller.getPos().add(5, 0, 5), controller.getPos().add(5, 0, -5), controller.getPos().add(-5, 0, -5), controller.getPos().add(-5, 0, 5)));
+		controller.addTask(new Task(queue));
 		
 		for (MobBase mob : entities)
-		{
 			controller.addMob(mob);
-			controller.addTask(task);
-		}
 		return true;
 //		if (world.isRemote) return true; 
 //		TileEntity te = world.getTileEntity(pos);

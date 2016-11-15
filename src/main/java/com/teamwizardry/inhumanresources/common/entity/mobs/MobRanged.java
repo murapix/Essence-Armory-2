@@ -1,6 +1,5 @@
 package com.teamwizardry.inhumanresources.common.entity.mobs;
 
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIRangedAttack;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -14,7 +13,6 @@ import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -26,6 +24,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIRangedAttack;
 
 public abstract class MobRanged extends MobBase
 {
@@ -40,7 +39,7 @@ public abstract class MobRanged extends MobBase
 	protected void initEntityAI()
 	{
 		super.initEntityAI();
-		this.tasks.addTask(1, new MobAIRangedAttack(this, 1, 20, 15));	
+		this.tasks.addTask(1, new MobAIRangedAttack(this, 0, 0, 15));	
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityDragon>(this, EntityDragon.class, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityGhast>(this, EntityGhast.class, true));
@@ -56,13 +55,6 @@ public abstract class MobRanged extends MobBase
 		this.dataManager.register(SWINGING_ARMS, Boolean.valueOf(false));
 	}
 
-	@Override
-	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
-	{
-		super.setEquipmentBasedOnDifficulty(difficulty);
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-	}
-	
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float arrowSpeed)
 	{
 		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.worldObj, this);

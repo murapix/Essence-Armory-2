@@ -29,7 +29,8 @@ public class MobAIGetNextTarget extends EntityAIBase
 		this.followSpeed = followSpeed;
 		this.setMutexBits(3);
 
-		if (!(mob.getNavigator() instanceof PathNavigateGround)) { throw new IllegalArgumentException("Unsupported mob type for GetNextTarget"); }
+		if (!(mob.getNavigator() instanceof PathNavigateGround))
+			throw new IllegalArgumentException("Unsupported mob type for GetNextTarget");
 	}
 
 	@Override
@@ -106,7 +107,7 @@ public class MobAIGetNextTarget extends EntityAIBase
 			double y = target.getY() + 0.5;
 			double z = target.getZ() + 0.5;
 			this.mob.getLookHelper().setLookPosition(x, y, z, 10, this.mob.getVerticalFaceSpeed());
-			
+
 			if (mob.getDistanceSq(x, y, z) <= mob.interactDistance * mob.interactDistance)
 			{
 				inter.cyclePos();

@@ -9,7 +9,7 @@ import com.teamwizardry.inhumanresources.common.upgrade.UpgradeRegistry;
 import com.teamwizardry.inhumanresources.common.utils.handler.ConfigHandler;
 import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
 import com.teamwizardry.inhumanresources.init.BlockRegistry;
-import com.teamwizardry.inhumanresources.init.EAEntityRegistry;
+import com.teamwizardry.inhumanresources.init.ModEntityRegistry;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
 import com.teamwizardry.inhumanresources.init.RecipeRegistry;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,7 +38,7 @@ public class CommonProxy
 	public void onInit(FMLInitializationEvent event)
 	{
 		register();
-		EAEntityRegistry.registerEntities();
+		ModEntityRegistry.registerEntities();
 		RecipeRegistry.registerRecipes();
 		UpgradeRegistry.init();
 	}

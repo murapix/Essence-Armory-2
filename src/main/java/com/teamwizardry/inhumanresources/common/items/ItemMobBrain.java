@@ -3,12 +3,6 @@ package com.teamwizardry.inhumanresources.common.items;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import com.teamwizardry.inhumanresources.client.gui.screen.GuiResearchTablet;
-import com.teamwizardry.inhumanresources.common.capability.knowledge.KnowledgeProvider;
-import com.teamwizardry.inhumanresources.common.items.base.ItemBaseEA;
-import com.teamwizardry.inhumanresources.common.research.BasicResearch;
-import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +15,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import com.teamwizardry.inhumanresources.client.gui.screen.GuiResearchTablet;
+import com.teamwizardry.inhumanresources.common.capability.knowledge.KnowledgeProvider;
+import com.teamwizardry.inhumanresources.common.research.BasicResearch;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
+import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
+import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 
-public class ItemMobBrain extends ItemBaseEA
+public class ItemMobBrain extends ItemMod
 {
 	private ArrayList<BasicResearch> research = new ArrayList<>();
 	private LinkedHashSet<BasicResearch> dupeTester = new LinkedHashSet<>();
@@ -30,6 +31,7 @@ public class ItemMobBrain extends ItemBaseEA
 	public ItemMobBrain(String name)
 	{
 		super(name);
+		setCreativeTab(Util.tabEssence);
 	}
 
 	public void addResearch(BasicResearch research)

@@ -8,6 +8,6 @@ public class ModInfo
     MOD_VERSION = "0.1",
     CLIENT_PROXY = "com.teamwizardry.inhumanresources.proxy.ClientProxy",
     SERVER_PROXY = "com.teamwizardry.inhumanresources.proxy.ServerProxy",
-    DEPENDENCIES = "",
+    DEPENDENCIES = "required-after:librarianlib",
     GUI_FACTORY = "com.teamwizardry.inhumanresources.client.gui.GuiFactory";
 }

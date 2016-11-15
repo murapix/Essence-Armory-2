@@ -1,6 +1,6 @@
 package com.teamwizardry.inhumanresources.proxy;
 
-import com.teamwizardry.inhumanresources.init.EAEntityRegistry;
+import com.teamwizardry.inhumanresources.init.ModEntityRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void onInit(FMLInitializationEvent event) {
         super.onInit(event);
-        EAEntityRegistry.initRenderers();
+        ModEntityRegistry.initRenderers();
     }
 
     @Override
