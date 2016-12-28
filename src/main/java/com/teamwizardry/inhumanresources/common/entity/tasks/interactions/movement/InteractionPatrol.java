@@ -11,12 +11,24 @@ public class InteractionPatrol implements InteractionMovement
 {
 	private Queue<BlockPos> positions;
 	private boolean shouldCycle = false;
+	private EndCondition endCondition;
+	private BlockPos finalPos;
 	
 	public InteractionPatrol(BlockPos... targetPoses)
 	{
 		this.positions = new LinkedList<>();
 		for (BlockPos pos : targetPoses)
 			this.positions.add(pos);
+		this.endCondition = EndCondition.FOREVER;
+		if (targetPoses.length > 0)
+			this.finalPos = targetPoses[targetPoses.length - 1];
+		else this.finalPos = null;
+	}
+	
+	public InteractionPatrol(EndCondition endCondition, BlockPos... targetPoses)
+	{
+		this(targetPoses);
+		this.endCondition = endCondition;
 	}
 	
 	@Override
@@ -48,6 +60,23 @@ public class InteractionPatrol implements InteractionMovement
 	{
 		BlockPos pos = positions.remove();
 		positions.add(pos);
+		shouldCycle = checkEndCondition(pos);
 		return pos;
+	}
+	
+	private boolean checkEndCondition(BlockPos pos)
+	{
+		switch (endCondition)
+		{
+			case FOREVER:
+				return false;
+			case ONCE:
+				return pos.equals(finalPos);
+			case INVENTORY_FULL:
+				return false;
+			case INVENTORY_EMPTY:
+				return false;
+		}
+		return shouldCycle;
 	}
 }

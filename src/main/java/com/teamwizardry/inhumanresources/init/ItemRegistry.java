@@ -2,14 +2,18 @@ package com.teamwizardry.inhumanresources.init;
 
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
+import com.teamwizardry.inhumanresources.common.items.ItemBedrockSword;
+import com.teamwizardry.inhumanresources.common.items.ItemComponent;
 import com.teamwizardry.inhumanresources.common.items.ItemMistwroughtSword;
 import com.teamwizardry.inhumanresources.common.items.ItemMobBrain;
+import com.teamwizardry.inhumanresources.common.items.ItemNeedle;
 import com.teamwizardry.inhumanresources.common.items.ItemResearchLog;
 import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 import com.teamwizardry.librarianlib.common.base.item.ItemModSword;
 
 public class ItemRegistry
 {
+	public static ToolMaterial bedrock = EnumHelper.addToolMaterial("bedrock", 4, 4000, 9, 7.5F, 0);
 	public static ToolMaterial mistwrought = EnumHelper.addToolMaterial("mistwrought", 4, 5000, 10, 6, 0);
 	
 	public static ItemMod itemResearchLog;
@@ -26,6 +30,11 @@ public class ItemRegistry
 	public static ItemMod slimeBrain;
 	public static ItemMod zombieBrain;
 	
+	public static ItemMod component;
+	public static ItemMod compressor;
+	public static ItemMod needle;
+	
+	public static ItemModSword bedrockSword;
 	public static ItemModSword mistwroughtSword; 
 
 	public static void init()
@@ -42,7 +51,12 @@ public class ItemRegistry
 		skeletonBrain = new ItemMobBrain("skeletonBrain");
 		slimeBrain = new ItemMobBrain("slimeBrain");
 		zombieBrain = new ItemMobBrain("zombieBrain");
+		
+		component = new ItemComponent("plate", "plateObsidian", "plateEndstone", "plateBedrock", "plateMistwrought");
+		compressor = new ItemComponent("compressor");
+		needle = new ItemNeedle("needle", "needleGold", "needleRedstone");
 
+		bedrockSword = new ItemBedrockSword("bedrockSword", bedrock);
 		mistwroughtSword = new ItemMistwroughtSword("mistwroughtSword", mistwrought);
 	}
 }

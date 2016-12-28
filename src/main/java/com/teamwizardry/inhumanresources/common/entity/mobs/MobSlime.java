@@ -47,7 +47,7 @@ public class MobSlime extends MobBase
 	{
 		this.tasks.addTask(1, new MobSlime.AISlimeFloat(this));
 		this.tasks.addTask(5, new MobSlime.AISlimeHop(this));
-		this.targetTasks.addTask(6, new MobAIGetNextTarget(this, 1));
+		this.tasks.addTask(6, new MobAIGetNextTarget(this, 1));
 		this.targetTasks.addTask(7, new MobAIFollowOwner(this, 1, 4, 32));
 		this.targetTasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 32));
 	}
@@ -248,7 +248,7 @@ public class MobSlime extends MobBase
 		public AISlimeFloat(MobSlime slime)
 		{
 			this.slime = slime;
-			this.setMutexBits(5);
+			this.setMutexBits(4);
 			((PathNavigateGround) slime.getNavigator()).setCanSwim(true);
 		}
 
@@ -278,7 +278,7 @@ public class MobSlime extends MobBase
 		public AISlimeHop(MobSlime slime)
 		{
 			this.slime = slime;
-			this.setMutexBits(5);
+			this.setMutexBits(4);
 		}
 
 		@Override
@@ -291,12 +291,18 @@ public class MobSlime extends MobBase
 		public void updateTask()
 		{
 			Path path = this.slime.getNavigator().getPath();
+			if (path == null)
+			{
+				this.slime.getNavigator().clearPathEntity();
+				return;
+			}
 			PathPoint point = path.getPathPointFromIndex(path.getCurrentPathIndex());
 			double xDir = (point.xCoord + 0.5) - this.slime.posX;
 			double zDir = (point.zCoord + 0.5) - this.slime.posZ;
 			MobSlime.SlimeMoveHelper moveHelper = (MobSlime.SlimeMoveHelper) this.slime.getMoveHelper();
 			moveHelper.setDirection((float) MathHelper.atan2(zDir, xDir), false);
 			moveHelper.setSpeed(1);
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(""));
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Target X: " + Integer.toString(point.xCoord)));
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Target Z: " + Integer.toString(point.zCoord)));
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Current X: " + Integer.toString((int) this.slime.posX)));

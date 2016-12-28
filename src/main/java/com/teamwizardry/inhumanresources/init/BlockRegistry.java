@@ -1,23 +1,23 @@
 package com.teamwizardry.inhumanresources.init;
 
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.teamwizardry.inhumanresources.common.blocks.BlockBrainExtractor;
 import com.teamwizardry.inhumanresources.common.blocks.BlockChipCreator;
 import com.teamwizardry.inhumanresources.common.blocks.BlockMobController;
 import com.teamwizardry.inhumanresources.common.blocks.BlockMobTrap;
-import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
 import com.teamwizardry.inhumanresources.common.tile.TEBrainExtractor;
 import com.teamwizardry.inhumanresources.common.tile.TEChipCreator;
 import com.teamwizardry.inhumanresources.common.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.tile.TEMobTrap;
 import com.teamwizardry.inhumanresources.common.utils.lib.LibUtils;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
 
 public class BlockRegistry
 {
-	public static TEBlockEA blockMobTrap;
-	public static TEBlockEA blockBrainExtractor;
-	public static TEBlockEA blockChipCreator;
-	public static TEBlockEA blockMobController;
+	public static BlockModContainer blockMobTrap;
+	public static BlockModContainer blockBrainExtractor;
+	public static BlockModContainer blockChipCreator;
+	public static BlockModContainer blockMobController;
 	
 	public static void init()
 	{

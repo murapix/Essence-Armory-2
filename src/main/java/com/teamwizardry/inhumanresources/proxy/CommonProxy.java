@@ -11,6 +11,7 @@ import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
 import com.teamwizardry.inhumanresources.init.BlockRegistry;
 import com.teamwizardry.inhumanresources.init.ModEntityRegistry;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
+import com.teamwizardry.inhumanresources.init.PotionRegistry;
 import com.teamwizardry.inhumanresources.init.RecipeRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -27,6 +28,7 @@ public class CommonProxy
 	{
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		eventRegistry();
+		PotionRegistry.init();
 		ItemRegistry.init();
 		BlockRegistry.init();
 		BlockRegistry.tileEntityRegisty();

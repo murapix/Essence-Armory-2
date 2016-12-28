@@ -3,6 +3,7 @@ package com.teamwizardry.inhumanresources.common.blocks;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
 import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.IInteraction;
@@ -21,16 +21,19 @@ import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.invent
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPush;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.movement.InteractionPatrol;
 import com.teamwizardry.inhumanresources.common.tile.TEMobController;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
 
-public class BlockMobController extends TEBlockEA
+public class BlockMobController extends BlockModContainer
 {
 	public BlockMobController(String name)
 	{
-		super(name);
+		super(name, Material.IRON);
+		setCreativeTab(Util.tabEssence);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World worldIn, IBlockState state)
 	{
 		return new TEMobController();
 	}

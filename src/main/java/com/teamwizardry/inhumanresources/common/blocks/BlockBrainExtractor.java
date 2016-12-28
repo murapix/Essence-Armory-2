@@ -1,21 +1,23 @@
 package com.teamwizardry.inhumanresources.common.blocks;
 
-import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
-import com.teamwizardry.inhumanresources.common.tile.TEBrainExtractor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import com.teamwizardry.inhumanresources.common.tile.TEBrainExtractor;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
 
-public class BlockBrainExtractor extends TEBlockEA
+public class BlockBrainExtractor extends BlockModContainer
 {
 	public BlockBrainExtractor(String name)
 	{
 		super(name, Material.IRON);
+		setCreativeTab(Util.tabEssence);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TEBrainExtractor();
 	}

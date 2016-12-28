@@ -1,8 +1,6 @@
 package com.teamwizardry.inhumanresources.common.blocks;
 
-import com.teamwizardry.inhumanresources.InhumanResources;
-import com.teamwizardry.inhumanresources.common.blocks.base.TEBlockEA;
-import com.teamwizardry.inhumanresources.common.tile.TEChipCreator;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,16 +9,21 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import com.teamwizardry.inhumanresources.InhumanResources;
+import com.teamwizardry.inhumanresources.common.tile.TEChipCreator;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
 
-public class BlockChipCreator extends TEBlockEA
+public class BlockChipCreator extends BlockModContainer
 {
 	public BlockChipCreator(String name)
 	{
-		super(name);
+		super(name, Material.IRON);
+		setCreativeTab(Util.tabEssence);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World worldIn, IBlockState state)
 	{
 		return new TEChipCreator();
 	}

@@ -30,12 +30,10 @@ minecraft {
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
     maven { url "http://dvs1.progwml6.com/files/maven" }
 }
 
 dependencies {
-    compile 'com.github.TeamWizardry:LibrarianLib:-SNAPSHOT'
     deobfCompile "mezz.jei:jei_1.10.2:3.10.0.261:api"
     runtime "mezz.jei:jei_1.10.2:3.10.0.261"
 }
