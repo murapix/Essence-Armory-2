@@ -1,9 +1,7 @@
 package com.teamwizardry.inhumanresources.init;
 
-import java.util.UUID;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
-import com.teamwizardry.inhumanresources.common.potions.PotionIhR;
+import com.teamwizardry.inhumanresources.common.potions.PotionRedstoneNeedle;
 
 public class PotionRegistry
 {
@@ -11,6 +9,6 @@ public class PotionRegistry
 	
 	public static void init()
 	{
-		REDSTONE_NEEDLE = new PotionIhR("redstone_needle", true, 0xFF0000, 0).registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, UUID.randomUUID().toString(), -0.2, 2);;
+		REDSTONE_NEEDLE = new PotionRedstoneNeedle("redstone_needle", true, 0xFF0000, 0);
 	}
 }
