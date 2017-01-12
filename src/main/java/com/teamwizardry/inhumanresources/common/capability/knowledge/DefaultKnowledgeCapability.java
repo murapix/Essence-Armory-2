@@ -1,13 +1,13 @@
 package com.teamwizardry.inhumanresources.common.capability.knowledge;
 
 import java.util.ArrayList;
-import com.teamwizardry.inhumanresources.common.network.EAPacketHandler;
-import com.teamwizardry.inhumanresources.common.network.KnowledgeUpdateMessage;
-import com.teamwizardry.inhumanresources.common.research.ResearchBase;
-import com.teamwizardry.inhumanresources.common.research.ResearchNetwork;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import com.teamwizardry.inhumanresources.common.network.EAPacketHandler;
+import com.teamwizardry.inhumanresources.common.network.KnowledgeUpdateMessage;
+import com.teamwizardry.inhumanresources.common.research.ResearchBase;
+import com.teamwizardry.inhumanresources.init.ResearchRegistry;
 
 /**
  * Created by SirShadow on 18. 08. 2016.
@@ -38,13 +38,13 @@ public class DefaultKnowledgeCapability implements IKnowledgeCapability
     @Override
     public boolean hasPrerequisites(String name)
     {
-    	return knowledge.containsAll(ResearchNetwork.getPrerequisites(name));
+    	return knowledge.containsAll(ResearchRegistry.getPrerequisites(name));
     }
 
     @Override
     public void addKnowledge(EntityPlayer player, String name)
     {
-        knowledge.add(ResearchNetwork.getResearch(name));
+        knowledge.add(ResearchRegistry.getResearch(name));
         if(player != null)
         {
             dataChanged(player);

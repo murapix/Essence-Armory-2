@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.inhumanresources.init.PotionRegistry;
 import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 
@@ -35,7 +34,7 @@ public class ItemNeedle extends ItemMod
 					target.addPotionEffect(new PotionEffect(redstoneNeedle, 600, prevAmplifier));
 			}
 			target.addPotionEffect(new PotionEffect(redstoneNeedle, 600, 0));
-			stack.stackSize--;
+			player.inventory.decrStackSize(player.inventory.getSlotFor(stack), 1);
 			return true;
 		}
 		return false;

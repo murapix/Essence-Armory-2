@@ -1,9 +1,6 @@
 package com.teamwizardry.inhumanresources.common.capability.knowledge;
 
 import java.util.ArrayList;
-import com.teamwizardry.inhumanresources.common.research.ResearchBase;
-import com.teamwizardry.inhumanresources.common.research.ResearchNetwork;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -12,6 +9,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.Constants;
+import com.teamwizardry.inhumanresources.common.research.ResearchBase;
+import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
+import com.teamwizardry.inhumanresources.init.ResearchRegistry;
 
 /**
  * Created by SirShadow on 18. 08. 2016.
@@ -41,7 +41,7 @@ public class KnowledgeCapabilityStorage implements IStorage<IKnowledgeCapability
         NBTTagList list = tag.getTagList(NBTTags.KNOWLEDGE_TAG, Constants.NBT.TAG_STRING);
         ArrayList<ResearchBase> knowledge = new ArrayList<>();
         for (int i = 0; i < list.tagCount(); i ++){
-            knowledge.add(ResearchNetwork.getResearch(list.getStringTagAt(i)));
+            knowledge.add(ResearchRegistry.getResearch(list.getStringTagAt(i)));
         }
         instance.setKnowledge(knowledge);
     }

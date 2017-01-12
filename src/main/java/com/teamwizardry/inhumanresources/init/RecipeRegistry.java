@@ -1,9 +1,10 @@
 package com.teamwizardry.inhumanresources.init;
 
+import static com.teamwizardry.inhumanresources.init.ResearchRegistry.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import com.teamwizardry.inhumanresources.common.crafting.BiggerCraftingRecipe;
+import com.teamwizardry.inhumanresources.common.crafting.ResearchCraftingRecipe;
 
 public class RecipeRegistry
 {
@@ -15,7 +16,7 @@ public class RecipeRegistry
 		ItemStack bedrockPlate = new ItemStack(ItemRegistry.component, 1, 2);
 		ItemStack mistwroughtPlate = new ItemStack(ItemRegistry.component, 1, 3);
 		
-		GameRegistry.addRecipe(new BiggerCraftingRecipe(ItemRegistry.bedrockSword, 
+		GameRegistry.addRecipe(new ResearchCraftingRecipe(BEDROCK_FORGING, ItemRegistry.bedrockSword, 
 				"    A",
 				"   AA",
 				"  AA ",
@@ -23,7 +24,7 @@ public class RecipeRegistry
 				"BC   ",
 				'A', bedrockPlate, 'B', endstonePlate, 'C', Items.DIAMOND));
 		
-		GameRegistry.addRecipe(new BiggerCraftingRecipe(ItemRegistry.mistwroughtSword,
+		GameRegistry.addRecipe(new ResearchCraftingRecipe(MIST_FORGING, ItemRegistry.mistwroughtSword,
 				"    A",
 				"  BAA",
 				" BAA ",

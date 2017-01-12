@@ -3,6 +3,7 @@ package com.teamwizardry.inhumanresources.common.crafting;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import com.teamwizardry.inhumanresources.common.research.ResearchBase;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -12,28 +13,29 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class BiggerCraftingRecipe implements IRecipe
+public class ResearchCraftingRecipe implements IRecipe
 {
-	public static final int MAX_CRAFT_GRID_WIDTH = 5;
-	public static final int MAX_CRAFT_GRID_HEIGHT = 5;
+	public static final int MAX_CRAFT_GRID_WIDTH = 3;
+	public static final int MAX_CRAFT_GRID_HEIGHT = 3;
 
+	protected ResearchBase requiredResearch;
 	protected ItemStack output;
 	protected Object[] input;
 	protected int width = 0;
 	protected int height = 0;
 	protected boolean mirrored = true;
 
-	public BiggerCraftingRecipe(Block result, Object... recipe)
+	public ResearchCraftingRecipe(ResearchBase requiredResearch, Block result, Object... recipe)
 	{
-		this(new ItemStack(result), recipe);
+		this(requiredResearch, new ItemStack(result), recipe);
 	}
 
-	public BiggerCraftingRecipe(Item result, Object... recipe)
+	public ResearchCraftingRecipe(ResearchBase requiredResearch, Item result, Object... recipe)
 	{
-		this(new ItemStack(result), recipe);
+		this(requiredResearch, new ItemStack(result), recipe);
 	}
 
-	public BiggerCraftingRecipe(ItemStack result, Object... recipe)
+	public ResearchCraftingRecipe(ResearchBase requiredResearch, ItemStack result, Object... recipe)
 	{
 		output = result.copy();
 

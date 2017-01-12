@@ -1,12 +1,14 @@
-package com.teamwizardry.inhumanresources.common.research;
+package com.teamwizardry.inhumanresources.init;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.teamwizardry.inhumanresources.common.research.BasicResearch;
+import com.teamwizardry.inhumanresources.common.research.ResearchBase;
 
-public class ResearchNetwork
+public class ResearchRegistry
 {
 	private static Multimap<ResearchBase, ResearchBase> requirementTree;
 	private static Multimap<ResearchBase, ResearchBase> reverseTree;
@@ -74,6 +76,10 @@ public class ResearchNetwork
 	public static BasicResearch ZOMBIE_JUMPING;
 	public static BasicResearch ZOMBIE_TARGETING;
 	public static BasicResearch ZOMBIE_COMPLETE;
+	
+	public static BasicResearch ALL_MOBS;
+	public static BasicResearch BEDROCK_FORGING;
+	public static BasicResearch MIST_FORGING;
 	
 	public static void init()
 	{
@@ -143,6 +149,10 @@ public class ResearchNetwork
 		addResearch(ZOMBIE_JUMPING);
 		addResearch(ZOMBIE_TARGETING);
 		addResearch(ZOMBIE_COMPLETE, ZOMBIE_AGGRESSION, ZOMBIE_WALKING, ZOMBIE_JUMPING, ZOMBIE_TARGETING);
+		
+		addResearch(ALL_MOBS, ENDERMAN_COMPLETE, SPIDER_COMPLETE, PIG_ZOMBIE_COMPLETE, BLAZE_COMPLETE, CREEPER_COMPLETE, ENDERMITE_COMPLETE, GUARDIAN_COMPLETE, SILVERFISH_COMPLETE, SKELETON_COMPLETE, SLIME_COMPLETE, ZOMBIE_COMPLETE);
+		addResearch(BEDROCK_FORGING, ALL_MOBS);
+		addResearch(MIST_FORGING, ALL_MOBS);
 	}
 	
 	public static void addResearch(ResearchBase research, ResearchBase... prerequisites)

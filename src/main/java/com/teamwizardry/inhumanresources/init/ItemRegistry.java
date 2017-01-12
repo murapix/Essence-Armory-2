@@ -7,8 +7,10 @@ import com.teamwizardry.inhumanresources.common.items.ItemComponent;
 import com.teamwizardry.inhumanresources.common.items.ItemMistwroughtSword;
 import com.teamwizardry.inhumanresources.common.items.ItemMobBrain;
 import com.teamwizardry.inhumanresources.common.items.ItemNeedle;
+import com.teamwizardry.inhumanresources.common.items.ItemRedstoneArrow;
 import com.teamwizardry.inhumanresources.common.items.ItemResearchLog;
 import com.teamwizardry.librarianlib.common.base.item.ItemMod;
+import com.teamwizardry.librarianlib.common.base.item.ItemModArrow;
 import com.teamwizardry.librarianlib.common.base.item.ItemModSword;
 
 public class ItemRegistry
@@ -33,6 +35,7 @@ public class ItemRegistry
 	public static ItemMod component;
 	public static ItemMod compressor;
 	public static ItemMod needle;
+	public static ItemModArrow redstoneArrow;
 	
 	public static ItemModSword bedrockSword;
 	public static ItemModSword mistwroughtSword; 
@@ -55,6 +58,7 @@ public class ItemRegistry
 		component = new ItemComponent("plate", "plateObsidian", "plateEndstone", "plateBedrock", "plateMistwrought");
 		compressor = new ItemComponent("compressor");
 		needle = new ItemNeedle("needle", "needleGold", "needleRedstone");
+		redstoneArrow = new ItemRedstoneArrow("redstoneArrow");
 
 		bedrockSword = new ItemBedrockSword("bedrockSword", bedrock);
 		mistwroughtSword = new ItemMistwroughtSword("mistwroughtSword", mistwrought);
