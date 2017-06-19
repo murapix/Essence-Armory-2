@@ -28,7 +28,7 @@ public class TEMobTrap extends TileEntity implements ITickable
 		AxisAlignedBB axis = new AxisAlignedBB(pos.add(0, 1, 0), pos.add(1, 3, 1));
 		Vec3d center = new Vec3d(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 		
-		List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axis, Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
+		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
 				{
 			public boolean apply(@Nullable Entity entity)
 			{
@@ -53,9 +53,9 @@ public class TEMobTrap extends TileEntity implements ITickable
 		}
 		else if (trappedEntity != null)
 		{
-			trappedEntity.setPosition(center.xCoord, center.yCoord, center.zCoord);
+			trappedEntity.setPosition(center.x, center.y, center.z);
 			// Debug
-			worldObj.spawnParticle(EnumParticleTypes.DRAGON_BREATH, trappedEntity.posX, trappedEntity.posY + trappedEntity.height, trappedEntity.posZ, ThreadLocalRandom.current().nextDouble(0.01, 0.02), ThreadLocalRandom.current().nextDouble(0.1, 0.2), ThreadLocalRandom.current().nextDouble(0.01, 0.02));
+			world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, trappedEntity.posX, trappedEntity.posY + trappedEntity.height, trappedEntity.posZ, ThreadLocalRandom.current().nextDouble(0.01, 0.02), ThreadLocalRandom.current().nextDouble(0.1, 0.2), ThreadLocalRandom.current().nextDouble(0.01, 0.02));
 		}
 
 	}

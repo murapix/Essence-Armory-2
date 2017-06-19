@@ -60,7 +60,7 @@ public class TEChipCreator extends TileEntity implements ITickable
 				if (operationProgress >= OPERATION_TIME)
 				{
 					operationProgress = 0;
-					player.addChatMessage(new TextComponentString("Research Verified"));
+					player.sendMessage(new TextComponentString("Research Verified"));
 				}
 				else
 				{

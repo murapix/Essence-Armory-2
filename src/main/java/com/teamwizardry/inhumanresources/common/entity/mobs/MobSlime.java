@@ -77,7 +77,7 @@ public class MobSlime extends MobBase
 
 	public static void func_189758_c(DataFixer p_189758_0_)
 	{
-		EntityLiving.func_189752_a(p_189758_0_, "Slime");
+		EntityLiving.registerFixesMob(p_189758_0_, MobSlime.class);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class MobSlime extends MobBase
 				float f1 = this.rand.nextFloat() * 0.5F + 0.5F;
 				float f2 = MathHelper.sin(f) * i * 0.5F * f1;
 				float f3 = MathHelper.cos(f) * i * 0.5F * f1;
-				World world = this.worldObj;
+				World world = this.world;
 				EnumParticleTypes particleType = this.getParticleType();
 				double d0 = this.posX + f2;
 				double d1 = this.posZ + f3;
@@ -153,7 +153,7 @@ public class MobSlime extends MobBase
 
 	protected EntitySlime createInstance()
 	{
-		return new EntitySlime(this.worldObj);
+		return new EntitySlime(this.world);
 	}
 
 	@Override
@@ -165,9 +165,6 @@ public class MobSlime extends MobBase
 			this.setSize(0.5F * i, 0.5F * i);
 			this.rotationYaw = this.rotationYawHead;
 			this.renderYawOffset = this.rotationYawHead;
-
-			if (this.isInWater() && this.rand.nextInt(20) == 0)
-				this.resetHeight();
 		}
 
 		super.notifyDataManagerChange(key);
@@ -297,16 +294,16 @@ public class MobSlime extends MobBase
 				return;
 			}
 			PathPoint point = path.getPathPointFromIndex(path.getCurrentPathIndex());
-			double xDir = (point.xCoord + 0.5) - this.slime.posX;
-			double zDir = (point.zCoord + 0.5) - this.slime.posZ;
+			double xDir = (point.x+ 0.5) - this.slime.posX;
+			double zDir = (point.z+ 0.5) - this.slime.posZ;
 			MobSlime.SlimeMoveHelper moveHelper = (MobSlime.SlimeMoveHelper) this.slime.getMoveHelper();
 			moveHelper.setDirection((float) MathHelper.atan2(zDir, xDir), false);
 			moveHelper.setSpeed(1);
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(""));
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Target X: " + Integer.toString(point.xCoord)));
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Target Z: " + Integer.toString(point.zCoord)));
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Current X: " + Integer.toString((int) this.slime.posX)));
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("Current Z: " + Integer.toString((int) this.slime.posZ)));
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString(""));
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Target X: " + Integer.toString(point.x)));
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Target Z: " + Integer.toString(point.z)));
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Current X: " + Integer.toString((int) this.slime.posX)));
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Current Z: " + Integer.toString((int) this.slime.posZ)));
 		}
 	}
 

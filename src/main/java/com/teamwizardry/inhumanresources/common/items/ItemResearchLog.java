@@ -26,8 +26,9 @@ public class ItemResearchLog extends ItemMod
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
+		ItemStack stack = player.getHeldItem(hand);
 		if (world.isRemote && Minecraft.getMinecraft().currentScreen != null)
 			return new ActionResult<>(EnumActionResult.FAIL, stack);
 		player.setActiveHand(hand);
@@ -35,7 +36,7 @@ public class ItemResearchLog extends ItemMod
 		if (!stack.getTagCompound().hasKey(NBTTags.PLAYER_ID_TAG))
 		{
 			stack.getTagCompound().setUniqueId(NBTTags.PLAYER_ID_TAG, player.getUniqueID());
-			if (world.isRemote) player.addChatMessage(new TextComponentString("Bound to " + TextHelper.BRIGHT_BLUE + player.getName()));
+			if (world.isRemote) player.sendMessage(new TextComponentString("Bound to " + TextHelper.BRIGHT_BLUE + player.getName()));
 		}
 		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}

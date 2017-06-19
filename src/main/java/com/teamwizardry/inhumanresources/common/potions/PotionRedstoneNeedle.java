@@ -89,11 +89,11 @@ public class PotionRedstoneNeedle extends PotionIhR
 	{
 		if (event.getSource() == null)
 			return;
-		if (event.getSource().getEntity() == null)
+		if (event.getSource().getTrueSource() == null)
 			return;
-		if (event.getSource().getEntity() instanceof EntityLivingBase)
+		if (event.getSource().getTrueSource() instanceof EntityLivingBase)
 		{
-			PotionEffect effect = ((EntityLivingBase) event.getSource().getEntity()).getActivePotionEffect(PotionRegistry.REDSTONE_NEEDLE);
+			PotionEffect effect = ((EntityLivingBase) event.getSource().getTrueSource()).getActivePotionEffect(PotionRegistry.REDSTONE_NEEDLE);
 			if (effect == null)
 				return;
 			if (effect.getAmplifier() >= 4)

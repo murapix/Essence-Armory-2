@@ -45,7 +45,7 @@ public class TEBrainExtractor extends TileEntity implements ITickable
 	public void update()
 	{
 		AxisAlignedBB axis = new AxisAlignedBB(pos, pos.down(2)).expand(1, 1, 1);
-		List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axis, Predicates.and(EntitySelectors.NOT_SPECTATING, VALID_KNOWLEDGE_ENTITY));
+		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, Predicates.and(EntitySelectors.NOT_SPECTATING, VALID_KNOWLEDGE_ENTITY));
 		Vec3d center = new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 		if (currentEntity != null && entities.contains(currentEntity))
 		{
@@ -53,66 +53,66 @@ public class TEBrainExtractor extends TileEntity implements ITickable
 			{
 				operationProgress = 0;
 				((EntityLivingBase) currentEntity).setDead();
-				if (!worldObj.isRemote)
+				if (!world.isRemote)
 				{
-					EntityItem item = new EntityItem(worldObj);
-					item.setPosition(center.xCoord, center.yCoord + 0.5, center.zCoord);
+					EntityItem item = new EntityItem(world);
+					item.setPosition(center.x, center.y + 0.5, center.z);
 					Class<? extends IMob> entityClass = currentEntity.getClass();
 
 					if (entityClass == EntityEnderman.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.endermanBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.endermanBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntitySpider.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.spiderBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.spiderBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityPigZombie.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.pigZombieBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.pigZombieBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityBlaze.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.blazeBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.blazeBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityCreeper.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.creeperBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.creeperBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityEndermite.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.endermiteBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.endermiteBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityGuardian.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.guardianBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.guardianBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntitySilverfish.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.silverfishBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.silverfishBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntitySkeleton.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.skeletonBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.skeletonBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntitySlime.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.slimeBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.slimeBrain));
+						world.spawnEntity(item);
 					}
 					else if (entityClass == EntityZombie.class)
 					{
-						item.setEntityItemStack(new ItemStack(ItemRegistry.zombieBrain));
-						worldObj.spawnEntityInWorld(item);
+						item.setItem(new ItemStack(ItemRegistry.zombieBrain));
+						world.spawnEntity(item);
 					}
 				}
 				currentEntity = null;

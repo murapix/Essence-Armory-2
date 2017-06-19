@@ -56,7 +56,7 @@ public class MobAIFollowOwner extends EntityAIBase
 	}
 	
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		if (this.pathfinder.noPath())
 			return false;

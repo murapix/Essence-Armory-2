@@ -77,7 +77,7 @@ public class MobBase extends EntityCreature implements IEntityOwnable
 	{
 		BlockPos pos = this.getControllerPos();
 		if (pos == null) return null;
-		TileEntity te = this.worldObj.getTileEntity(pos);
+		TileEntity te = this.world.getTileEntity(pos);
 		if (te instanceof TEMobController)
 			return (TEMobController) te;
 		return null;
@@ -105,7 +105,7 @@ public class MobBase extends EntityCreature implements IEntityOwnable
 		try
 		{
 			UUID uuid = this.getOwnerId();
-			return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
+			return uuid == null ? null : this.world.getPlayerEntityByUUID(uuid);
 		}
 		catch (IllegalArgumentException e)
 		{

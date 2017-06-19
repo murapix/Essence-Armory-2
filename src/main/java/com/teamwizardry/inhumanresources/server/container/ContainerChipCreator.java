@@ -86,7 +86,7 @@ public class ContainerChipCreator extends Container
 			else if (!this.mergeItemStack(temp, 0, TEChipCreator.SIZE, false))
 				return null;
 			
-			if (temp.stackSize == 0)
+			if (temp.isEmpty())
 				slot.putStack(null);
 			
 			else slot.onSlotChanged();

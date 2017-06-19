@@ -74,7 +74,7 @@ public class EntityEndBoss extends EntityMob
 			{
 				EntityLivingBase target = (EntityLivingBase) entity;
 				target.attackEntityFrom(new DamageSource("endBoss"), 20);
-				float magnitude = MathHelper.sqrt_float((float) (motionX*motionX + motionY*motionY));
+				float magnitude = MathHelper.sqrt((float) (motionX*motionX + motionY*motionY));
 				target.knockBack(this, magnitude, -motionX / magnitude, -motionZ / magnitude);
 				target.attackEntityAsMob(this);
 				target.setRevengeTarget(this);
@@ -111,9 +111,9 @@ public class EntityEndBoss extends EntityMob
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
 		getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1F + 0.95F, random.nextFloat()*0.1F + 0.95F, false);
-		if (source.getEntity() instanceof EntityLivingBase)
+		if (source.getTrueSource() instanceof EntityLivingBase)
 		{
-			this.setAttackTarget((EntityLivingBase) source.getEntity());
+			this.setAttackTarget((EntityLivingBase) source.getTrueSource());
 		}
 		return super.attackEntityFrom(source, amount);
 	}
@@ -126,7 +126,7 @@ public class EntityEndBoss extends EntityMob
 			this.setHealth(1);
 			this.bossInfo.setPercent(0);
 			
-			if (source.getEntity() instanceof EntityPlayer)
+			if (source.getTrueSource() instanceof EntityPlayer)
 			{
 //				EntityPlayer player = (EntityPlayer) source.getEntity();
 //				if (!player.hasAchievement(AchievementRegistry.endBoss))

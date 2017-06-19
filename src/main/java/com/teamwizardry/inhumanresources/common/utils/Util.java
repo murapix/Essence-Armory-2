@@ -1,12 +1,14 @@
 package com.teamwizardry.inhumanresources.common.utils;
 
 import java.util.UUID;
+
 import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,9 +28,9 @@ public class Util
 
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
+		public ItemStack getTabIconItem()
 		{
-			return ItemRegistry.itemResearchLog;
+			return new ItemStack(ItemRegistry.itemResearchLog);
 		}
 	};
 

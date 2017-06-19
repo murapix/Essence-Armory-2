@@ -14,28 +14,29 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
-group = mod_group 
-archivesBaseName = mod_artifact_basename
+version = 0.1
+group = "com.teamwizardry"
+archivesBaseName = "inhumanresources"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = minecraft_version + "-" + forge_version
+    version = "1.11.2-13.20.0.2303"
     runDir = "run"
-   
-    mappings = mcp_mappings_version
+    mappings = "stable_32"
 }
 
 repositories {
     mavenCentral()
     maven { url "http://dvs1.progwml6.com/files/maven" }
+	maven { url "http://maven.bluexin.be/repository/snapshots/" }
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_1.10.2:3.10.0.261:api"
-    runtime "mezz.jei:jei_1.10.2:3.10.0.261"
+    deobfCompile "mezz.jei:jei_1.11.2:4.5.0.289:api"
+    runtime "mezz.jei:jei_1.11.2:4.5.0.289"
+    compile "com.teamwizardry.librarianlib:librarianlib:3.1.5-SNAPSHOT:deobf"
 }
 
 processResources

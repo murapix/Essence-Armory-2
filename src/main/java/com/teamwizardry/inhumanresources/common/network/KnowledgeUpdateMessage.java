@@ -40,8 +40,8 @@ public class KnowledgeUpdateMessage implements IMessage,IMessageHandler<Knowledg
 
     @Override
     public IMessage onMessage( final KnowledgeUpdateMessage message, final MessageContext ctx) {
-        IThreadListener mainThread = (ctx.side.isClient())? Minecraft.getMinecraft() : (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
-        mainThread.addScheduledTask(() -> KnowledgeProvider.get(Minecraft.getMinecraft().thePlayer).loadNBTData(message.tag));
+        IThreadListener mainThread = (ctx.side.isClient())? Minecraft.getMinecraft() : (WorldServer) ctx.getServerHandler().player.world;
+        mainThread.addScheduledTask(() -> KnowledgeProvider.get(Minecraft.getMinecraft().player).loadNBTData(message.tag));
         return null;
     }
 }

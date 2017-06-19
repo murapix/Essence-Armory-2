@@ -29,10 +29,11 @@ public class ModEntityRegistry
 	
 	public static void registerEntities()
 	{
+		// TODO: Find out what this "ResourceLocation registry" is
 		int index = 0;
-		EntityRegistry.registerModEntity(EntityEndBoss.class, "endBoss", index++, InhumanResources.instance, 64, 3, true, Color.MAGENTA.getRGB(), Color.PINK.getRGB());
-		EntityRegistry.registerModEntity(MobZombie.class, "mobZombie", index++, InhumanResources.instance, 64, 3, true, Color.GREEN.getRGB(), Color.MAGENTA.getRGB());
-		EntityRegistry.registerModEntity(MobSkeleton.class, "mobSkeleton", index++, InhumanResources.instance, 64, 3, true, Color.GRAY.getRGB(), Color.MAGENTA.getRGB());
+		EntityRegistry.registerModEntity(null, EntityEndBoss.class, "endBoss", index++, InhumanResources.instance, 64, 3, true, Color.MAGENTA.getRGB(), Color.PINK.getRGB());
+		EntityRegistry.registerModEntity(null, MobZombie.class, "mobZombie", index++, InhumanResources.instance, 64, 3, true, Color.GREEN.getRGB(), Color.MAGENTA.getRGB());
+		EntityRegistry.registerModEntity(null, MobSkeleton.class, "mobSkeleton", index++, InhumanResources.instance, 64, 3, true, Color.GRAY.getRGB(), Color.MAGENTA.getRGB());
 //		EntityRegistry.registerModEntity(MobSlime.class, "mobSlime", index++, InhumanResources.instance, 64, 3, true, 0x32CD32, Color.MAGENTA.getRGB());
 	}
 }

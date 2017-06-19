@@ -64,7 +64,7 @@ public abstract class EntityBossBase extends EntityMob
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
-		if (!worldObj.isRemote && worldObj.getDifficulty() == EnumDifficulty.PEACEFUL) setDead();
+		if (!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) setDead();
 	}
 
 	@Override

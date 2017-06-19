@@ -32,7 +32,7 @@ public class InteractionInventoryPush implements InteractionInventory
 	
 	public ItemStack[] interact(MobBase mob)
 	{
-		TileEntity te = mob.worldObj.getTileEntity(pos);
+		TileEntity te = mob.world.getTileEntity(pos);
 		if (!(te instanceof IInventory))
 			return null;
 		IInventory inventory = (IInventory) te;
@@ -40,7 +40,7 @@ public class InteractionInventoryPush implements InteractionInventory
 		if (items == null) return null;
 		for (int i = 0; i < items.length; i++)
 		{
-			if (items[i] == null || items[i].stackSize == 0 || items[i].getItem() == null)
+			if (items[i] == null || items[i].getCount() == 0 || items[i].getItem() == null)
 				continue;
 			
 			boolean itemMatched = false;
@@ -52,7 +52,7 @@ public class InteractionInventoryPush implements InteractionInventory
 					if (ItemStack.areItemsEqual(items[i], stack) && ItemStack.areItemStackTagsEqual(items[i], stack))
 					{
 						itemMatched = true;
-						refStackSize = stack.stackSize;
+						refStackSize = stack.getCount();
 					}
 				}
 				if (!itemMatched)
@@ -74,23 +74,23 @@ public class InteractionInventoryPush implements InteractionInventory
 			
 			for (int j = 0; j < inventory.getSizeInventory(); j++)
 			{
-				if (items[i] == null || items[i].stackSize == 0 || items[i].getItem() == null)
+				if (items[i] == null || items[i].getCount() == 0 || items[i].getItem() == null)
 					continue;
 				
 				int transferableAmount = 0;
 				
 				ItemStack item = inventory.getStackInSlot(j);
-				if (item != null && item.getItem() != null && item.stackSize != 0 && !(ItemStack.areItemsEqual(items[i], item) && ItemStack.areItemStackTagsEqual(items[i], item)))
+				if (item != null && item.getItem() != null && item.getCount() != 0 && !(ItemStack.areItemsEqual(items[i], item) && ItemStack.areItemStackTagsEqual(items[i], item)))
 					continue;
 				if (item == null || item.getItem() == null)
 					transferableAmount = items[i].getMaxStackSize();
-				else if (item.stackSize == 0)
+				else if (item.getCount() == 0)
 				{
 					item = null;
 					transferableAmount = items[i].getMaxStackSize();
 				}
 				else if (ItemStack.areItemsEqual(items[i], item))
-					transferableAmount = items[i].getMaxStackSize() - item.stackSize;
+					transferableAmount = items[i].getMaxStackSize() - item.getCount();
 				
 				switch (behavior)
 				{
@@ -107,12 +107,12 @@ public class InteractionInventoryPush implements InteractionInventory
 						break;
 				}
 				
-				int oldSize = item == null ? 0 : item.stackSize;
+				int oldSize = item == null ? 0 : item.getCount();
 				item = items[i].splitStack(transferableAmount);
-				if (items[i].stackSize == 0) items[i] = null;
-				item.stackSize += oldSize;
-				if (item.stackSize > item.getMaxStackSize())
-					item.stackSize = item.getMaxStackSize();
+				if (items[i].getCount() == 0) items[i] = null;
+				item.grow(oldSize);
+				if (item.getCount() > item.getMaxStackSize())
+					item.setCount(item.getMaxStackSize());
 				inventory.setInventorySlotContents(j, item);
 			}
 		}

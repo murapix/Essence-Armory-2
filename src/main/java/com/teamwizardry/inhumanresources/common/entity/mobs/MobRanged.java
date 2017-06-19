@@ -1,5 +1,7 @@
 package com.teamwizardry.inhumanresources.common.entity.mobs;
 
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIRangedAttack;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -18,13 +20,10 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIRangedAttack;
 
 public abstract class MobRanged extends MobBase
 {
@@ -57,16 +56,15 @@ public abstract class MobRanged extends MobBase
 
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float arrowSpeed)
 	{
-		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.worldObj, this);
+		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
         double d0 = target.posX - this.posX;
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entitytippedarrow.posY;
         double d2 = target.posZ - this.posZ;
-        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-        entitytippedarrow.setThrowableHeading(d0, d1 + d3 * 0.2, d2, 1.6F, (float)(14 - this.worldObj.getDifficulty().getDifficultyId() * 4));
+        double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
+        entitytippedarrow.setThrowableHeading(d0, d1 + d3 * 0.2, d2, 1.6F, (float)(14 - this.world.getDifficulty().getDifficultyId() * 4));
         int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, this);
         int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, this);
-        DifficultyInstance difficultyinstance = this.worldObj.getDifficultyForLocation(new BlockPos(this));
-        entitytippedarrow.setDamage((double)(arrowSpeed * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.getDifficulty().getDifficultyId() * 0.11F));
+        entitytippedarrow.setDamage((double)(arrowSpeed * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
 
         if (i > 0)
             entitytippedarrow.setDamage(entitytippedarrow.getDamage() + (double)i * 0.5D + 0.5D);
@@ -74,7 +72,7 @@ public abstract class MobRanged extends MobBase
         if (j > 0)
             entitytippedarrow.setKnockbackStrength(j);
 
-        boolean flag = this.isBurning() && difficultyinstance.func_190083_c() && this.rand.nextBoolean();
+        boolean flag = this.isBurning() && this.rand.nextBoolean();
         flag = flag || EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, this) > 0;
 
         if (flag)
@@ -86,7 +84,7 @@ public abstract class MobRanged extends MobBase
             entitytippedarrow.setPotionEffect(itemstack);
 
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.worldObj.spawnEntityInWorld(entitytippedarrow);
+        this.world.spawnEntity(entitytippedarrow);
 	}
 	
 	@SideOnly(Side.CLIENT)

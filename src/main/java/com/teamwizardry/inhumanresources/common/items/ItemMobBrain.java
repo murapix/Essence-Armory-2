@@ -3,7 +3,14 @@ package com.teamwizardry.inhumanresources.common.items;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import net.minecraft.client.Minecraft;
+
+import com.teamwizardry.inhumanresources.common.capability.knowledge.KnowledgeProvider;
+import com.teamwizardry.inhumanresources.common.research.BasicResearch;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
+import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
+import com.teamwizardry.librarianlib.common.base.item.ItemMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,13 +22,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.teamwizardry.inhumanresources.client.gui.screen.GuiResearchTablet;
-import com.teamwizardry.inhumanresources.common.capability.knowledge.KnowledgeProvider;
-import com.teamwizardry.inhumanresources.common.research.BasicResearch;
-import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
-import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 
 public class ItemMobBrain extends ItemMod
 {
@@ -59,8 +59,9 @@ public class ItemMobBrain extends ItemMod
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack item, World world, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
+		ItemStack item = player.getHeldItem(hand);
 		if (player.hasCapability(KnowledgeProvider.KnowlageCapability, null) && item.hasTagCompound())
 		{
 			if (world.isRemote && !KnowledgeProvider.get(player).hasKnowledge(item.getTagCompound().getString(NBTTags.KNOWLEDGE_TAG)))
@@ -74,11 +75,10 @@ public class ItemMobBrain extends ItemMod
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack item, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiResearchTablet());
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.FAIL;
