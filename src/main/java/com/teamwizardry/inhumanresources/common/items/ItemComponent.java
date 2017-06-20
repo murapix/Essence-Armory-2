@@ -1,7 +1,7 @@
 package com.teamwizardry.inhumanresources.common.items;
 
 import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.librarianlib.common.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 
 public class ItemComponent extends ItemMod
 {

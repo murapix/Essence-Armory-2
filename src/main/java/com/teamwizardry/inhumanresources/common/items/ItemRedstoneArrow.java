@@ -1,5 +1,9 @@
 package com.teamwizardry.inhumanresources.common.items;
 
+import com.teamwizardry.inhumanresources.common.entity.EntityRedstoneArrow;
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.librarianlib.features.base.item.ItemModArrow;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +13,6 @@ import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import com.teamwizardry.inhumanresources.common.entity.EntityRedstoneArrow;
-import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.librarianlib.common.base.item.ItemModArrow;
 
 public class ItemRedstoneArrow extends ItemModArrow
 {

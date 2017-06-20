@@ -1,6 +1,5 @@
 package com.teamwizardry.inhumanresources.init;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.teamwizardry.inhumanresources.common.blocks.BlockBrainExtractor;
 import com.teamwizardry.inhumanresources.common.blocks.BlockChipCreator;
 import com.teamwizardry.inhumanresources.common.blocks.BlockMobController;
@@ -10,7 +9,9 @@ import com.teamwizardry.inhumanresources.common.tile.TEChipCreator;
 import com.teamwizardry.inhumanresources.common.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.tile.TEMobTrap;
 import com.teamwizardry.inhumanresources.common.utils.lib.LibUtils;
-import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
+import com.teamwizardry.librarianlib.features.base.block.BlockModContainer;
+
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockRegistry
 {

@@ -3,7 +3,7 @@ package com.teamwizardry.inhumanresources.common.blocks;
 import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.tile.TEChipCreator;
 import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.librarianlib.common.base.block.BlockModContainer;
+import com.teamwizardry.librarianlib.features.base.block.BlockModContainer;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

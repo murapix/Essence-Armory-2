@@ -1,14 +1,15 @@
 package com.teamwizardry.inhumanresources.common.items;
 
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.inhumanresources.init.PotionRegistry;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.inhumanresources.init.PotionRegistry;
-import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 
 public class ItemNeedle extends ItemMod
 {

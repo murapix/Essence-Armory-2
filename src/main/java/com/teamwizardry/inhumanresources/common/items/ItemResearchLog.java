@@ -2,6 +2,12 @@ package com.teamwizardry.inhumanresources.common.items;
 
 import java.util.List;
 import java.util.UUID;
+
+import com.teamwizardry.inhumanresources.common.utils.Util;
+import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
+import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,10 +18,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.UsernameCache;
-import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
-import com.teamwizardry.librarianlib.common.base.item.ItemMod;
 
 public class ItemResearchLog extends ItemMod
 {

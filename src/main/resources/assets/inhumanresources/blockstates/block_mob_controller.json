@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "inhumanresources:block_mob_controller"
+		}
+	}
+}

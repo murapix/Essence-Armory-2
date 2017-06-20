@@ -9,7 +9,7 @@ import com.teamwizardry.inhumanresources.common.research.BasicResearch;
 import com.teamwizardry.inhumanresources.common.utils.Util;
 import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
 import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
-import com.teamwizardry.librarianlib.common.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
