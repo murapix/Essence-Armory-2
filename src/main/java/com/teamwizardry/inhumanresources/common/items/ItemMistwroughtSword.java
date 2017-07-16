@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -47,19 +48,25 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 	public ItemMistwroughtSword(String name, ToolMaterial toolMaterial)
 	{
 		super(name, toolMaterial);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected)
 	{
+		NBTTagCompound itemTag;
 		if (stack.hasTagCompound())
-			return;
+		{
+			itemTag = stack.getTagCompound();
+			if (stack.getTagCompound().hasKey(ModInfo.MOD_ID))
+				return;
+		}
+		else itemTag = new NBTTagCompound();
 		NBTTagCompound compound = new NBTTagCompound();
 		compound.setString(OFFENSIVE, VOIDFIRE);
 		compound.setString(OFFENSIVE_UPGRADE, PRECISION);
 		compound.setString(DEFENSIVE, LIFE_LINK);
-		compound.setString(DEFENSIVE, LIFE_WARD);
-		NBTTagCompound itemTag = new NBTTagCompound();
+		compound.setString(DEFENSIVE_UPGRADE, LIFE_WARD);
 		itemTag.setTag(ModInfo.MOD_ID, compound);
 		stack.setTagCompound(itemTag);
 	}
@@ -77,17 +84,21 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 			{
 				if (isCritting(attacker))
 				{
+					float baseDamage = event.getAmount();
 					switch (getOffensive(weapon))
 					{
 						case VOIDFIRE:
-							target.attackEntityFrom(DamageRegistry.VOIDFIRE, event.getAmount() * 0.25F);
+							target.hurtResistantTime = 0;
+							target.attackEntityFrom(DamageRegistry.VOIDFIRE, baseDamage * 0.25F);
 							switch (getOffensiveUpgrade(weapon))
 							{
 								case STUN_HIT:
 									break;
 								case PRECISION:
-									target.attackEntityFrom(DamageSource.GENERIC, event.getAmount() * 0.5F);
-									event.setAmount(event.getAmount() * 0.5F);
+									target.hurtResistantTime = 0;
+									target.attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), baseDamage * 0.5F);
+									event.setAmount(baseDamage * 0.5F);
+									target.hurtResistantTime = 0;
 									break;
 							}
 							break;
@@ -101,7 +112,7 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 							}
 							break;
 					}
-					switch (getDefensive(weapon))
+					/*switch (getDefensive(weapon))
 					{
 						case LIFE_LINK:
 							attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 1));
@@ -124,7 +135,7 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 									break;
 							}
 							break;
-					}
+					}*/
 				}
 			}
 		}
@@ -142,25 +153,9 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 
 	@Nonnull
 	@Override
-	public String getActive(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(ACTIVE);
-	}
-
-	@Nonnull
-	@Override
 	public List<String> getActives()
 	{
 		return Arrays.asList(LEAP_STRIKE, BLOOD_RAGE);
-	}
-
-	@Nonnull
-	@Override
-	public String getActiveUpgrade(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(ACTIVE_UPGRADE);
 	}
 
 	@Nonnull
@@ -176,28 +171,12 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 		}
 		return Arrays.asList(new String[] {});
 	}
-
-	@Nonnull
-	@Override
-	public String getOffensive(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(OFFENSIVE);
-	}
-
+	
 	@Nonnull
 	@Override
 	public List<String> getOffensives()
 	{
 		return Arrays.asList(VOIDFIRE, SUNDER);
-	}
-
-	@Nonnull
-	@Override
-	public String getOffensiveUpgrade(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(OFFENSIVE_UPGRADE);
 	}
 
 	@Nonnull
@@ -216,25 +195,9 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 
 	@Nonnull
 	@Override
-	public String getDefensive(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(DEFENSIVE);
-	}
-
-	@Nonnull
-	@Override
 	public List<String> getDefensives()
 	{
 		return Arrays.asList(LIFE_LINK, PRESSURE);
-	}
-
-	@Nonnull
-	@Override
-	public String getDefensiveUpgrade(ItemStack item)
-	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
-		return compound == null ? "" : compound.getString(DEFENSIVE_UPGRADE);
 	}
 
 	@Nonnull
