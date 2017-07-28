@@ -5,22 +5,27 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.utils.IUpgradable;
+import com.teamwizardry.inhumanresources.common.utils.Util;
 import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.inhumanresources.init.DamageRegistry;
+import com.teamwizardry.inhumanresources.init.PotionRegistry;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 {
@@ -31,12 +36,12 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 	private static final String BLOOD_FURY = "blood fury"; // Gain movespeed during Blood Rage
 	private static final String EVER_RAGE = "everlasting rage"; // Blood Rage duration increased
 
-	private static final String VOIDFIRE = "voidfire"; // Crits gain 25% of base as unblockable damage
+	private static final String VOID_DAMAGE = "voidfire"; // Voidfire: Crits gain 25% of base as unblockable damage
 	private static final String STUN_HIT = "stunning blows"; // Crits stun for 1 sec
-	private static final String PRECISION = "precise strikes"; // Crits ignore 50% of armor
-	private static final String SUNDER = "sunder"; // Crits give "Extra damage for 4 seconds, no crit multi"
-	private static final String BREAK = "break"; // Sunder effect stacks
-	private static final String SHATTER = "shatter"; // Sunder no longer removes crit multi
+	private static final String ARMOR_PIERCE = "precise strikes"; // Precision: Crits ignore 50% of armor
+	private static final String TIME_DAMAGE = "sunder"; // Crits give "Extra damage for 4 seconds, no crit multi"
+	private static final String DAMAGE_OVERLAP = "break"; // Sunder effect stacks
+	private static final String CRIT_TIME = "shatter"; // Sunder no longer removes crit multi
 
 	private static final String LIFE_LINK = "life link"; // Crits give a Regeneration effect
 	private static final String LIFE_WARD = "life ward"; // Life Link gives a Resistance effect too
@@ -44,6 +49,9 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 	private static final String PRESSURE = "pressure"; // Crits push knock back nearby entities
 	private static final String COMPRESSION = "compression"; // Larger knock back radius
 	private static final String EXPULSION = "expulsion"; // Knock back slows as well
+	
+	private static final float RADIUS = 3;
+	private static final float BIG_RADIUS = 5;
 
 	public ItemMistwroughtSword(String name, ToolMaterial toolMaterial)
 	{
@@ -58,97 +66,132 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 		if (stack.hasTagCompound())
 		{
 			itemTag = stack.getTagCompound();
-			if (stack.getTagCompound().hasKey(ModInfo.MOD_ID))
-				return;
+//			if (stack.getTagCompound().hasKey(ModInfo.MOD_ID))
+//				return;
 		}
 		else itemTag = new NBTTagCompound();
 		NBTTagCompound compound = new NBTTagCompound();
-		compound.setString(OFFENSIVE, VOIDFIRE);
-		compound.setString(OFFENSIVE_UPGRADE, PRECISION);
+		compound.setString(ACTIVE, BLOOD_RAGE);
+		compound.setString(ACTIVE_UPGRADE, BLOOD_FURY);
+		compound.setInteger(ACTIVE_COOLDOWN, 0);
+		compound.setString(OFFENSIVE, VOID_DAMAGE);
+		compound.setString(OFFENSIVE_UPGRADE, ARMOR_PIERCE);
 		compound.setString(DEFENSIVE, LIFE_LINK);
 		compound.setString(DEFENSIVE_UPGRADE, LIFE_WARD);
 		itemTag.setTag(ModInfo.MOD_ID, compound);
 		stack.setTagCompound(itemTag);
 	}
 	
-	@SubscribeEvent
-	public void onEntityAttacked(LivingHurtEvent event)
+	@Override
+	public boolean runActive(EntityPlayer player, ItemStack weapon, ItemStack offhand, boolean runAsMainhand)
 	{
-		Entity sourceEntity = event.getSource().getTrueSource();
-		if (sourceEntity instanceof EntityLivingBase)
+		InhumanResources.logger.info((player.world.isRemote ? "Client" : "Server") + " running active");
+		
+		if (!runAsMainhand)
+			return false;
+		if (weapon.getItem() != this)
+			return false;
+		switch(getActive(weapon))
 		{
-			EntityLivingBase target = event.getEntityLiving();
-			EntityLivingBase attacker = (EntityLivingBase) sourceEntity;
-			ItemStack weapon = attacker.getHeldItemMainhand();
-			if (weapon.getItem() instanceof ItemMistwroughtSword)
-			{
-				if (isCritting(attacker))
+			case LEAP_STRIKE:
+				break;
+			case BLOOD_RAGE:
+				int amplifier = 0;
+				int duration = 5;
+				switch(getActiveUpgrade(weapon))
 				{
-					float baseDamage = event.getAmount();
-					switch (getOffensive(weapon))
+					case BLOOD_FURY:
+						amplifier = 1;
+					case EVER_RAGE:
+						duration = 10;
+				}
+				player.addPotionEffect(new PotionEffect(PotionRegistry.MAX_CRIT, duration * 20, amplifier));
+				break;
+		}
+		return true;
+	}
+	
+	@Override
+	public void onAttackEntity(LivingHurtEvent event, EntityLivingBase attacker, EntityLivingBase target, ItemStack weapon, ItemStack offhand)
+	{
+		if (Util.isCritting(attacker))
+		{
+			float baseDamage = event.getAmount();
+			switch (getOffensive(weapon))
+			{
+				case VOID_DAMAGE:
+					target.hurtResistantTime = 0;
+					target.attackEntityFrom(DamageRegistry.VOIDFIRE, baseDamage * 0.25F);
+					switch (getOffensiveUpgrade(weapon))
 					{
-						case VOIDFIRE:
-							target.hurtResistantTime = 0;
-							target.attackEntityFrom(DamageRegistry.VOIDFIRE, baseDamage * 0.25F);
-							switch (getOffensiveUpgrade(weapon))
-							{
-								case STUN_HIT:
-									break;
-								case PRECISION:
-									target.hurtResistantTime = 0;
-									target.attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), baseDamage * 0.5F);
-									event.setAmount(baseDamage * 0.5F);
-									target.hurtResistantTime = 0;
-									break;
-							}
+						case STUN_HIT:
+							target.addPotionEffect(new PotionEffect(PotionRegistry.STUN, target instanceof EntityPlayer ? 10 : 20, 0));
 							break;
-						case SUNDER:
-							switch (getOffensiveUpgrade(weapon))
-							{
-								case BREAK:
-									break;
-								case SHATTER:
-									break;
-							}
+						case ARMOR_PIERCE:
+							target.hurtResistantTime = 0;
+							target.attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), baseDamage * 0.5F);
+							event.setAmount(baseDamage * 0.5F);
+							target.hurtResistantTime = 0;
 							break;
 					}
-					/*switch (getDefensive(weapon))
+					break;
+				case TIME_DAMAGE:
+					PotionEffect effect = attacker.getActivePotionEffect(PotionRegistry.CRIT_BONUS);
+					if (effect == null)
+						attacker.addPotionEffect(new PotionEffect(PotionRegistry.CRIT_BONUS, 80, 0));
+					switch (getOffensiveUpgrade(weapon))
 					{
-						case LIFE_LINK:
-							attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 1));
-							switch (getDefensiveUpgrade(weapon))
-							{
-								case LIFE_WARD:
-									attacker.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100, 0));
-									break;
-								case LIFE_TETHER:
-									attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 3));
-									break;
-							}
+						case DAMAGE_OVERLAP:
+							if (effect == null)
+								break;
+							if (effect.getAmplifier() < 4)
+								attacker.addPotionEffect(new PotionEffect(PotionRegistry.CRIT_BONUS, 80, effect.getAmplifier() + 1));
 							break;
-						case PRESSURE:
-							switch (getDefensiveUpgrade(weapon))
-							{
-								case COMPRESSION:
-									break;
-								case EXPULSION:
-									break;
-							}
+						case CRIT_TIME:
+							if (effect == null)
+								break;
+							event.setAmount(event.getAmount() * 1.5F);
 							break;
-					}*/
-				}
+					}
+					break;
+			}
+			switch (getDefensive(weapon))
+			{
+				case LIFE_LINK:
+					attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 0));
+					switch (getDefensiveUpgrade(weapon))
+					{
+						case LIFE_WARD:
+							attacker.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100, 0));
+							break;
+						case LIFE_TETHER:
+							attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 2));
+							break;
+					}
+					break;
+				case PRESSURE:
+					float radius = RADIUS;
+					boolean slow = false;
+					switch (getDefensiveUpgrade(weapon))
+					{
+						case COMPRESSION:
+							radius = BIG_RADIUS;
+							break;
+						case EXPULSION:
+							slow = true;
+							break;
+					}
+					AxisAlignedBB axis = new AxisAlignedBB(attacker.posX, attacker.posY, attacker.posZ, attacker.posX, attacker.posY, attacker.posZ).grow(radius);
+					List<Entity> entities = attacker.world.getEntitiesInAABBexcluding(attacker, axis, entity -> entity instanceof EntityLivingBase);
+					for (Entity entity : entities)
+					{
+						Vec3d dir = attacker.getPositionVector().subtract(entity.getPositionVector()).normalize();
+						((EntityLivingBase) entity).knockBack(null, radius, dir.x, dir.z);
+						if (slow) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 60, 1));
+					}
+					break;
 			}
 		}
-	}
-
-	private boolean isCritting(EntityLivingBase entity)
-	{
-		if (entity.fallDistance <= 0) return false;
-		if (entity.onGround) return false;
-		if (entity.isOnLadder()) return false;
-		if (entity.isInWater()) return false;
-		if (entity.isPotionActive(MobEffects.BLINDNESS)) return false;
-		return !entity.isRiding();
 	}
 
 	@Nonnull
@@ -172,11 +215,24 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 		return Arrays.asList(new String[] {});
 	}
 	
+	@Override
+	public int getActiveCooldown(String active, String activeUpgrade)
+	{
+		switch(active)
+		{
+			case LEAP_STRIKE:
+				return 100;
+			case BLOOD_RAGE:
+				return 600;
+		}
+		return -1;
+	}
+	
 	@Nonnull
 	@Override
 	public List<String> getOffensives()
 	{
-		return Arrays.asList(VOIDFIRE, SUNDER);
+		return Arrays.asList(VOID_DAMAGE, TIME_DAMAGE);
 	}
 
 	@Nonnull
@@ -185,10 +241,10 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 	{
 		switch (offensive)
 		{
-			case VOIDFIRE:
-				return Arrays.asList(STUN_HIT, PRECISION);
-			case SUNDER:
-				return Arrays.asList(BREAK, SHATTER);
+			case VOID_DAMAGE:
+				return Arrays.asList(STUN_HIT, ARMOR_PIERCE);
+			case TIME_DAMAGE:
+				return Arrays.asList(DAMAGE_OVERLAP, CRIT_TIME);
 		}
 		return Arrays.asList(new String[] {});
 	}

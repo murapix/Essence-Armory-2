@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * Created by SirShadow on 18. 08. 2016.
  */
-public class EACapabilityManeger
+public class IhRCapabilityManeger
 {
     public static void registerCapability()
     {

@@ -1,8 +1,7 @@
 package com.teamwizardry.inhumanresources.proxy;
 
-import com.teamwizardry.inhumanresources.common.capability.EACapabilityManeger;
+import com.teamwizardry.inhumanresources.common.capability.IhRCapabilityManeger;
 import com.teamwizardry.inhumanresources.common.event.EventHandler;
-import com.teamwizardry.inhumanresources.common.network.EAPacketHandler;
 import com.teamwizardry.inhumanresources.common.upgrade.UpgradeRegistry;
 import com.teamwizardry.inhumanresources.common.utils.handler.ConfigHandler;
 import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
@@ -29,9 +28,7 @@ public class CommonProxy
 		PotionRegistry.init();
 		ItemRegistry.init();
 		BlockRegistry.init();
-		BlockRegistry.tileEntityRegisty();
-		EAPacketHandler.register();
-		EACapabilityManeger.registerCapability();
+		IhRCapabilityManeger.registerCapability();
 		TextHelper.addColorsAndComponents();
 	}
 
@@ -52,7 +49,7 @@ public class CommonProxy
 	{
 		MinecraftForge.EVENT_BUS.register(EventHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
-		MinecraftForge.EVENT_BUS.register(new EACapabilityManeger());
+		MinecraftForge.EVENT_BUS.register(new IhRCapabilityManeger());
 	}
 
 	private void register()

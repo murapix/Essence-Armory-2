@@ -1,6 +1,13 @@
 package com.teamwizardry.inhumanresources.common.entity.mobs;
 
 import java.util.UUID;
+
+import com.google.common.base.Optional;
+import com.teamwizardry.inhumanresources.common.blocks.tile.TEMobController;
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIFollowOwner;
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIGetNextTarget;
+import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,11 +22,6 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.google.common.base.Optional;
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIFollowOwner;
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIGetNextTarget;
-import com.teamwizardry.inhumanresources.common.tile.TEMobController;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
 
 public class MobBase extends EntityCreature implements IEntityOwnable
 {

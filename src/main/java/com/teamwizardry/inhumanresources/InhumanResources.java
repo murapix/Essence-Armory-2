@@ -1,7 +1,10 @@
 package com.teamwizardry.inhumanresources;
 
+import org.apache.logging.log4j.Logger;
+
 import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.inhumanresources.proxy.CommonProxy;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -16,6 +19,8 @@ public class InhumanResources
 {
 	@Mod.Instance(ModInfo.MOD_ID)
 	public static InhumanResources instance;
+	
+	public static Logger logger;
 
 	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY, serverSide = ModInfo.SERVER_PROXY)
 	public static CommonProxy proxy;
@@ -23,6 +28,7 @@ public class InhumanResources
 	@Mod.EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
+		logger = event.getModLog();
 		proxy.onPreInit(event);
 	}
 

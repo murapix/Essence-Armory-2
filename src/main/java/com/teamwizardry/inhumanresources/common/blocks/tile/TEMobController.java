@@ -1,13 +1,17 @@
-package com.teamwizardry.inhumanresources.common.tile;
+package com.teamwizardry.inhumanresources.common.blocks.tile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
 import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
+import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
+
 import net.minecraft.tileentity.TileEntity;
 
+@TileRegister("mob_controller")
 public class TEMobController extends TileEntity
 {
 	private HashMap<MobBase, Task> mobTasks = new HashMap<>();

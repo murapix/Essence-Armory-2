@@ -1,11 +1,12 @@
 package com.teamwizardry.inhumanresources.common.entity.ai;
 
+import com.teamwizardry.inhumanresources.common.blocks.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
 import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.IInteraction;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventory;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.movement.InteractionMovement;
-import com.teamwizardry.inhumanresources.common.tile.TEMobController;
+
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import com.teamwizardry.inhumanresources.common.blocks.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
 import com.teamwizardry.inhumanresources.common.entity.tasks.Task;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.IInteraction;
@@ -11,7 +12,6 @@ import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.invent
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPull;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPush;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.movement.InteractionPatrol;
-import com.teamwizardry.inhumanresources.common.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.utils.Util;
 import com.teamwizardry.librarianlib.features.base.block.BlockModContainer;
 
