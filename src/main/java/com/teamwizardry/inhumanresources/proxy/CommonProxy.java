@@ -1,5 +1,7 @@
 package com.teamwizardry.inhumanresources.proxy;
 
+import com.teamwizardry.inhumanresources.InhumanResources;
+import com.teamwizardry.inhumanresources.client.gui.GuiHandler;
 import com.teamwizardry.inhumanresources.common.capability.IhRCapabilityManeger;
 import com.teamwizardry.inhumanresources.common.event.EventHandler;
 import com.teamwizardry.inhumanresources.common.upgrade.UpgradeRegistry;
@@ -15,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 /**
  * Created by SirShadow on 14.8.2016.
@@ -38,6 +41,7 @@ public class CommonProxy
 		ModEntityRegistry.registerEntities();
 		RecipeRegistry.registerRecipes();
 		UpgradeRegistry.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(InhumanResources.instance, new GuiHandler());
 	}
 
 	public void onPostInit(FMLPostInitializationEvent event)

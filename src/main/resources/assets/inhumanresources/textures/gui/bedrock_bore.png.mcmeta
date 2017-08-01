@@ -1,0 +1,10 @@
+{
+	"spritesheet":{
+		"textureWidth":256,
+		"textureHeight":256,
+		"sprites":{
+			"background": [0, 0, 176, 166],
+			"progress_bar": [176, 0, 29, 12]
+		}
+	}
+}
