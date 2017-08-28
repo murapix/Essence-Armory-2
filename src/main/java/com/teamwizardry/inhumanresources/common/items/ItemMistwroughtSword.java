@@ -121,7 +121,7 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 			{
 				case VOID_DAMAGE:
 					target.hurtResistantTime = 0;
-					target.attackEntityFrom(DamageRegistry.VOIDFIRE, baseDamage * 0.25F);
+					target.attackEntityFrom(DamageRegistry.VOIDFIRE.set(null, attacker), baseDamage * 0.25F);
 					switch (getOffensiveUpgrade(weapon))
 					{
 						case STUN_HIT:

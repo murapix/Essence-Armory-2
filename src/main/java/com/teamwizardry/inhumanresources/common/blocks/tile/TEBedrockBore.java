@@ -33,7 +33,7 @@ public class TEBedrockBore extends TileModTickable
 	public int burnTime = 0;
 	
 	@Save
-	public ItemStack[] items = new ItemStack[NUM_SLOTS];
+	public final ItemStack[] items = new ItemStack[NUM_SLOTS];
 	
 	public TEBedrockBore()
 	{
@@ -41,7 +41,6 @@ public class TEBedrockBore extends TileModTickable
 			items[i] = ItemStack.EMPTY;
 	}
 	
-	@Save
 	@CapabilityProvide(sides = { UP, DOWN, NORTH, SOUTH, EAST, WEST })
 	public IItemHandler inventory = new FilteredItemHandler(items)
 	{	
@@ -56,17 +55,17 @@ public class TEBedrockBore extends TileModTickable
 		{
 			return slot == OUTPUT_SLOT;
 		}
-	};
 
+		@Override
+		protected void onSlotChanged()
+		{
+			markDirty();
+		}
+	};
+	
 	@Override
 	public void tick()
 	{
-		if (items == null)
-			items = new ItemStack[NUM_SLOTS];
-		for (int i = 0; i < NUM_SLOTS; i++)
-			if (items[i] == null)
-				items[i] = ItemStack.EMPTY;
-	
 		if (burnTime > 0)
 		{
 			burnTime--;
@@ -77,6 +76,7 @@ public class TEBedrockBore extends TileModTickable
 					items[OUTPUT_SLOT] = new ItemStack(ItemRegistry.voidParticle, 1, 0);
 				else if (items[OUTPUT_SLOT].getCount() < items[OUTPUT_SLOT].getMaxStackSize())
 					items[OUTPUT_SLOT].grow(1);
+				markDirty();
 			}
 		}
 		else if (items[FUEL_SLOT].getCount() > 0)
@@ -85,6 +85,7 @@ public class TEBedrockBore extends TileModTickable
 			{
 				burnTime = FUEL_TIME;
 				items[FUEL_SLOT].shrink(1);
+				markDirty();
 			}
 		}
 	}

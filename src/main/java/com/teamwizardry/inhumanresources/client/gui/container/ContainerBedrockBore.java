@@ -20,5 +20,7 @@ public class ContainerBedrockBore extends ContainerBase
 		this.bore = bore;
 		playerInv = BaseWrappers.INSTANCE.player(player);
 		blockInv = BaseWrappers.INSTANCE.stacks(bore.inventory);
+		this.addSlots(playerInv);
+		this.addSlots(blockInv);
 	}
 }

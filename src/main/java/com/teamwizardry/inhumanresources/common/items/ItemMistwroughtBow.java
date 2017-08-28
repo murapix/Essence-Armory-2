@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class ItemMistwroughtBow extends ItemBow implements IUpgradable
 {
-
 	@Override
 	public void onAttackEntity(LivingHurtEvent event, EntityLivingBase attacker, EntityLivingBase target, ItemStack weapon, ItemStack offhand)
 	{

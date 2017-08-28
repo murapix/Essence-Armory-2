@@ -1,17 +1,14 @@
 package com.teamwizardry.inhumanresources.proxy;
 
-import org.lwjgl.input.Keyboard;
-
 import com.teamwizardry.inhumanresources.init.ModEntityRegistry;
 
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
-	public static KeyBinding mistwroughtActive;
+//	public static KeyBinding mistwroughtActive;
 	
 	@Override
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -23,7 +20,7 @@ public class ClientProxy extends CommonProxy
         super.onInit(event);
         ModEntityRegistry.initRenderers();
         
-        mistwroughtActive = new KeyBinding("key.mistwrought.desc", Keyboard.KEY_R, "key.inhumanresources.category");
+//        mistwroughtActive = new KeyBinding("key.mistwrought.desc", Keyboard.KEY_R, "key.inhumanresources.category");
     }
 
     @Override

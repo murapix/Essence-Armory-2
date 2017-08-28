@@ -7,8 +7,7 @@ import static net.minecraft.util.EnumFacing.SOUTH;
 import static net.minecraft.util.EnumFacing.UP;
 import static net.minecraft.util.EnumFacing.WEST;
 
-import javax.annotation.Nonnull;
-
+import com.teamwizardry.inhumanresources.common.utils.FilteredItemHandler;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.TileModTickable;
@@ -17,7 +16,6 @@ import com.teamwizardry.librarianlib.features.saving.Save;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 @TileRegister("duplicator")
 public class TEDuplicator extends TileModTickable
@@ -39,7 +37,7 @@ public class TEDuplicator extends TileModTickable
 	private boolean isActive = false;
 	
 	@Save
-	private ItemStack[] items = new ItemStack[NUM_SLOTS];
+	private final ItemStack[] items = new ItemStack[NUM_SLOTS];
 	
 	public TEDuplicator()
 	{
@@ -48,119 +46,34 @@ public class TEDuplicator extends TileModTickable
 	}
 	
 	@CapabilityProvide(sides = { UP, DOWN, NORTH, SOUTH, EAST, WEST })
-	private IItemHandler inventory = new IItemHandler()
+	private IItemHandler inventory = new FilteredItemHandler(items)
 	{
 		@Override
-		public int getSlots()
+		protected boolean canInsert(int slot, ItemStack stack)
 		{
-			return NUM_SLOTS;
+			if (slot == FUEL_SLOT)
+				return ItemStack.areItemsEqual(stack, new ItemStack(ItemRegistry.voidParticle, 1, 1));
+			if (slot == INPUT_SLOT)
+				return stack.getItem() != ItemRegistry.voidParticle;
+			return slot != OUTPUT_SLOT;
 		}
 
 		@Override
-		public ItemStack getStackInSlot(int slot)
+		protected boolean canExtract(int slot)
 		{
-			return items[slot];
+			return slot == OUTPUT_SLOT;
 		}
 
 		@Override
-		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+		protected void onSlotChanged()
 		{
-			if (stack.isEmpty())
-				return ItemStack.EMPTY;
-			if (slot == FUEL_SLOT && !ItemStack.areItemsEqual(stack, new ItemStack(ItemRegistry.voidParticle, 1, 1)))
-				return stack;
-			if (slot == INPUT_SLOT && stack.getItem() == ItemRegistry.voidParticle)
-				return stack;
-			if (slot == OUTPUT_SLOT)
-				return stack;
-			
-			validateSlotIndex(slot);
-			
-			ItemStack existing = items[slot];
-			int limit = getStackLimit(slot, stack);
-			
-			if (!existing.isEmpty())
-			{
-				if (!ItemHandlerHelper.canItemStacksStack(stack, existing))
-					return stack;
-				limit -= existing.getCount();
-			}
-			
-			if (limit <= 0)
-				return stack;
-			
-			boolean reachedLimit = stack.getCount() > limit;
-			
-			if (!simulate)
-			{
-				if (existing.isEmpty())
-					items[slot] = reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack;
-				else
-					existing.grow(reachedLimit ? limit : stack.getCount());
-			}
-			
-			return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+			markDirty();
 		}
-
-		@Override
-		public ItemStack extractItem(int slot, int amount, boolean simulate)
-		{
-	        if (amount == 0)
-	            return ItemStack.EMPTY;
-	        if (slot != OUTPUT_SLOT)
-	        	return ItemStack.EMPTY;
-
-	        validateSlotIndex(slot);
-
-	        ItemStack existing = items[slot];
-
-	        if (existing.isEmpty())
-	            return ItemStack.EMPTY;
-
-	        int toExtract = Math.min(amount, existing.getMaxStackSize());
-
-	        if (existing.getCount() <= toExtract)
-	        {
-	            if (!simulate)
-	                items[slot] = ItemStack.EMPTY;
-	            return existing;
-	        }
-	        else
-	        {
-	            if (!simulate)
-	            	items[slot] = ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract);
-	            return ItemHandlerHelper.copyStackWithSize(existing, toExtract);
-	        }
-		}
-
-		@Override
-		public int getSlotLimit(int slot)
-		{
-			return 64;
-		}
-		
-	    protected void validateSlotIndex(int slot)
-	    {
-	        if (slot < 0 || slot >= items.length)
-	            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + items.length + ")");
-	    }
-	    
-	    protected int getStackLimit(int slot, @Nonnull ItemStack stack)
-	    {
-	        return Math.min(getSlotLimit(slot), stack.getMaxStackSize());
-	    }
 	};
-	
 	
 	@Override
 	public void tick()
 	{
-		if (items == null)
-			items = new ItemStack[NUM_SLOTS];
-		for (int i = 0; i < NUM_SLOTS; i++)
-			if (items[i] == null)
-				items[i] = ItemStack.EMPTY;
-		
 		if (burnTime > 0)
 		{
 			burnTime--;

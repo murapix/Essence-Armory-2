@@ -12,7 +12,7 @@ public abstract class FilteredItemHandler implements IItemHandler
 {
 	@Save
 	private final ItemStack[] slots;
-
+	
 	public FilteredItemHandler(ItemStack[] slots)
 	{
 		this.slots = slots;
@@ -60,6 +60,7 @@ public abstract class FilteredItemHandler implements IItemHandler
 			if (existing.isEmpty())
 				slots[slot] = reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack;
 			else existing.grow(reachedLimit ? limit : stack.getCount());
+			onSlotChanged();
 		}
 		
 		return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
@@ -82,12 +83,20 @@ public abstract class FilteredItemHandler implements IItemHandler
 
 		if (existing.getCount() <= toExtract)
 		{
-			if (!simulate) slots[slot] = ItemStack.EMPTY;
+			if (!simulate)
+			{
+				slots[slot] = ItemStack.EMPTY;
+				onSlotChanged();
+			}
 			return existing;
 		}
 		else
 		{
-			if (!simulate) slots[slot] = ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract);
+			if (!simulate)
+			{
+				slots[slot] = ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract);
+				onSlotChanged();
+			}
 			return ItemHandlerHelper.copyStackWithSize(existing, toExtract);
 		}
 	}
@@ -112,4 +121,6 @@ public abstract class FilteredItemHandler implements IItemHandler
 	abstract protected boolean canInsert(int slot, ItemStack stack);
 
 	abstract protected boolean canExtract(int slot);
+	
+	abstract protected void onSlotChanged();	
 }
