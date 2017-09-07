@@ -19,7 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class ItemMistwroughtClaw extends ItemModSword implements IUpgradable
-{
+{	
 	private static final String FURY_SWIPES = "fury swipes"; // Fury Swipes: Gain +1 damage every time you hit an enemy, as long as you hit it recently
 	private static final String FRENZIED_STRIKES = "frenzied strikes"; // Weapon has increased attack speed
 	private static final String RAGING_STRIKES = "raging strikes"; // Fury Swipes now keeps across enemies, and drops of if you haven't hit something recently

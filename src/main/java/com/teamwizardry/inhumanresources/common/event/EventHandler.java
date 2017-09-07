@@ -1,13 +1,21 @@
 package com.teamwizardry.inhumanresources.common.event;
 
+import java.util.List;
+
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
 import com.teamwizardry.inhumanresources.common.utils.IUpgradable;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandler
@@ -21,6 +29,58 @@ public class EventHandler
 		{
 			MobBase mob = (MobBase) event.getTarget();
 			if (mob.getOwnerId() == null) mob.setOwner(event.getEntityPlayer());
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityLooted(LootingLevelEvent event)
+	{
+		EntityLivingBase target = event.getEntityLiving();
+		BlockPos pos = target.getPosition();
+		int lootingBonus = 0;
+		for (int x = -16; x <= 16; x++)
+			for (int z = -16; z <= 16; z++)
+				for (int y = -8; y <= 8; y++)
+					if (target.world.getBlockState(pos.add(x, y, z)).getBlock() == Blocks.BEACON)
+					{
+						Block block = target.world.getBlockState(pos.add(x, y, z).down()).getBlock();
+						if (block == Blocks.IRON_BLOCK)
+							lootingBonus = Math.max(lootingBonus, 1);
+						else if (block == Blocks.GOLD_BLOCK)
+							lootingBonus = Math.max(lootingBonus, 2);
+						else if (block == Blocks.DIAMOND_BLOCK)
+							lootingBonus = Math.max(lootingBonus, 3);
+						else if (block == Blocks.EMERALD_BLOCK)
+							lootingBonus = Math.max(lootingBonus, 4);
+					}
+		event.setLootingLevel(event.getLootingLevel() + lootingBonus);
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onBlockBreak(HarvestDropsEvent event)
+	{
+		if (!event.isSilkTouching())
+		{
+			BlockPos pos = event.getPos();
+			int fortuneBonus = 0;
+			for (int x = -16; x <= 16; x++)
+				for (int z = -16; z <= 16; z++)
+					for (int y = -8; y <= 8; y++)
+						if (event.getWorld().getBlockState(pos.add(x, y, z)).getBlock() == Blocks.BEACON)
+						{
+							Block block = event.getWorld().getBlockState(pos.add(x, y, z).down()).getBlock();
+							if (block == Blocks.IRON_BLOCK)
+								fortuneBonus = Math.max(fortuneBonus, 1);
+							else if (block == Blocks.GOLD_BLOCK)
+								fortuneBonus = Math.max(fortuneBonus, 2);
+							else if (block == Blocks.DIAMOND_BLOCK)
+								fortuneBonus = Math.max(fortuneBonus, 3);
+							else if (block == Blocks.EMERALD_BLOCK)
+								fortuneBonus = Math.max(fortuneBonus, 4);
+						}
+			List<ItemStack> drops = event.getDrops();
+			drops.clear();
+			drops.addAll(event.getState().getBlock().getDrops(event.getWorld(), event.getPos(), event.getState(), event.getFortuneLevel() + fortuneBonus));
 		}
 	}
 	
