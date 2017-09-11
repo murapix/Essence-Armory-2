@@ -1,6 +1,7 @@
 package com.teamwizardry.inhumanresources.common.entity.end;
 
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
+import com.teamwizardry.inhumanresources.InhumanResources;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +16,6 @@ public class RenderEndBoss extends RenderLiving<EntityEndBoss>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityEndBoss entity)
 	{
-		return new ResourceLocation(ModInfo.MOD_ID + ":textures/entity/boss/end.png");
+		return new ResourceLocation(InhumanResources.MOD_ID + ":textures/entity/boss/end.png");
 	}
 }

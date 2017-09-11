@@ -6,7 +6,6 @@ import com.google.common.base.Optional;
 import com.teamwizardry.inhumanresources.common.blocks.tile.TEMobController;
 import com.teamwizardry.inhumanresources.common.entity.ai.MobAIFollowOwner;
 import com.teamwizardry.inhumanresources.common.entity.ai.MobAIGetNextTarget;
-import com.teamwizardry.inhumanresources.common.utils.lib.NBTTags;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityOwnable;
@@ -25,6 +24,8 @@ import net.minecraft.world.World;
 
 public class MobBase extends EntityCreature implements IEntityOwnable
 {
+	public static final String OWNER_ID_TAG = "owner id";
+	
 	protected static final DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>> createKey(MobBase.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 	protected static final DataParameter<Optional<BlockPos>> CONTROLLER_POS = EntityDataManager.<Optional<BlockPos>> createKey(MobBase.class, DataSerializers.OPTIONAL_BLOCK_POS);
 	protected ItemStack[] inventory;
@@ -126,8 +127,8 @@ public class MobBase extends EntityCreature implements IEntityOwnable
 	{
 		super.writeEntityToNBT(compound);
 		if (this.getOwnerId() == null)
-			compound.setString(NBTTags.OWNER_ID_TAG, "");
-		else compound.setString(NBTTags.OWNER_ID_TAG, this.getOwnerId().toString());
+			compound.setString(OWNER_ID_TAG, "");
+		else compound.setString(OWNER_ID_TAG, this.getOwnerId().toString());
 	}
 
 	@Override
@@ -135,11 +136,11 @@ public class MobBase extends EntityCreature implements IEntityOwnable
 	{
 		super.readEntityFromNBT(compound);
 
-		if (compound.hasKey(NBTTags.OWNER_ID_TAG))
+		if (compound.hasKey(OWNER_ID_TAG))
 		{
 			try
 			{
-				this.setOwnerId(UUID.fromString(compound.getString(NBTTags.OWNER_ID_TAG)));
+				this.setOwnerId(UUID.fromString(compound.getString(OWNER_ID_TAG)));
 			}
 			catch (IllegalArgumentException e)
 			{}

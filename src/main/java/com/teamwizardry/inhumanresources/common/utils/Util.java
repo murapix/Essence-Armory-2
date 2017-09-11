@@ -2,7 +2,7 @@ package com.teamwizardry.inhumanresources.common.utils;
 
 import java.util.UUID;
 
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
 import com.teamwizardry.inhumanresources.init.PotionRegistry;
 
@@ -18,12 +18,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Util
 {
-	public static CreativeTabs tabEssence = new CreativeTabs(ModInfo.MOD_ID)
+	public static CreativeTabs tabEssence = new CreativeTabs(InhumanResources.MOD_ID)
 	{
 		@Override
 		public String getTabLabel()
 		{
-			return ModInfo.MOD_ID;
+			return InhumanResources.MOD_ID;
 		}
 
 		@Override

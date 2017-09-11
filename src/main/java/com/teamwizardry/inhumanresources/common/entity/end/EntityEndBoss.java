@@ -1,8 +1,10 @@
 package com.teamwizardry.inhumanresources.common.entity.end;
 
 import java.util.Random;
+
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.utils.helper.TextHelper;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -41,9 +43,9 @@ public class EntityEndBoss extends EntityMob
 		this.noClip = true;
 		this.isAirBorne = true;
 		this.experienceValue = 400;
-		ambientSound = new SoundEvent(new ResourceLocation(ModInfo.MOD_ID + ":endBossAmbient"));
-		hurtSound = new SoundEvent(new ResourceLocation(ModInfo.MOD_ID + ":endBossHurt"));
-		dieSound = new SoundEvent(new ResourceLocation(ModInfo.MOD_ID + ":endBossDie"));
+		ambientSound = new SoundEvent(new ResourceLocation(InhumanResources.MOD_ID + ":endBossAmbient"));
+		hurtSound = new SoundEvent(new ResourceLocation(InhumanResources.MOD_ID + ":endBossHurt"));
+		dieSound = new SoundEvent(new ResourceLocation(InhumanResources.MOD_ID + ":endBossDie"));
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
+import com.teamwizardry.inhumanresources.InhumanResources;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,42 +55,42 @@ public interface IUpgradable
 	@Nonnull
 	default public String getActive(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(ACTIVE);
 	}
 	
 	@Nonnull
 	default public String getActiveUpgrade(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(ACTIVE_UPGRADE);
 	}
 	
 	@Nonnull
 	default public String getOffensive(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(OFFENSIVE);
 	}
 	
 	@Nonnull
 	default public String getOffensiveUpgrade(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(OFFENSIVE_UPGRADE);
 	}
 	
 	@Nonnull
 	default public String getDefensive(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(DEFENSIVE);
 	}
 	
 	@Nonnull
 	default public String getDefensiveUpgrade(ItemStack item)
 	{
-		NBTTagCompound compound = item.getSubCompound(ModInfo.MOD_ID);
+		NBTTagCompound compound = item.getSubCompound(InhumanResources.MOD_ID);
 		return compound == null ? "" : compound.getString(DEFENSIVE_UPGRADE);
 	}
 	

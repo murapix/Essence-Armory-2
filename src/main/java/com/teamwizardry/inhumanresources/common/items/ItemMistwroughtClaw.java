@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.utils.IUpgradable;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
 
 import net.minecraft.entity.Entity;
@@ -47,7 +47,7 @@ public class ItemMistwroughtClaw extends ItemModSword implements IUpgradable
 		if (stack.hasTagCompound())
 		{
 			itemTag = stack.getTagCompound();
-			if (stack.getTagCompound().hasKey(ModInfo.MOD_ID))
+			if (stack.getTagCompound().hasKey(InhumanResources.MOD_ID))
 				return;
 		}
 		else itemTag = new NBTTagCompound();
@@ -59,7 +59,7 @@ public class ItemMistwroughtClaw extends ItemModSword implements IUpgradable
 		compound.setString(OFFENSIVE_UPGRADE, RAGING_STRIKES);
 		compound.setString(DEFENSIVE, LEECH);
 		compound.setString(DEFENSIVE_UPGRADE, MORE_LEECH);
-		itemTag.setTag(ModInfo.MOD_ID, compound);
+		itemTag.setTag(InhumanResources.MOD_ID, compound);
 		stack.setTagCompound(itemTag);
 	}
 	

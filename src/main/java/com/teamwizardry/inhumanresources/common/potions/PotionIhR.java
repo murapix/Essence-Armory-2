@@ -1,5 +1,9 @@
 package com.teamwizardry.inhumanresources.common.potions;
 
+import org.lwjgl.opengl.GL11;
+
+import com.teamwizardry.inhumanresources.InhumanResources;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,19 +16,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 
 public class PotionIhR extends Potion
 {
-	public static ResourceLocation texture = new ResourceLocation(ModInfo.MOD_ID + ":textures/misc/potions.png");
+	public static ResourceLocation texture = new ResourceLocation(InhumanResources.MOD_ID + ":textures/misc/potions.png");
 	private final int iconIndex;
 
 	public PotionIhR(String name, boolean badEffect, int color, int iconIndex)
 	{
 		super(badEffect, color);
-		GameRegistry.register(this, new ResourceLocation(ModInfo.MOD_ID, name));
-		setPotionName(ModInfo.MOD_ID + ".potion." + name);
+		GameRegistry.register(this, new ResourceLocation(InhumanResources.MOD_ID, name));
+		setPotionName(InhumanResources.MOD_ID + ".potion." + name);
 		this.iconIndex = iconIndex;
 	}
 

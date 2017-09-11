@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"variant=none": {
+			"model": "inhumanresources:none"
+		},
+		"variant=fortune": {
+			"model": "inhumanresources:fortune"
+		},
+		"variant=looting": {
+			"model": "inhumanresources:looting"
+		},
+		"variant=portal": {
+			"model": "inhumanresources:portal"
+		}
+	}
+}

@@ -1,8 +1,8 @@
 package com.teamwizardry.inhumanresources.client.gui.block;
 
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.client.gui.container.ContainerBedrockBore;
 import com.teamwizardry.inhumanresources.common.blocks.tile.TEBedrockBore;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.librarianlib.features.container.builtin.BaseWrappers.InventoryWrapperPlayer;
 import com.teamwizardry.librarianlib.features.gui.components.ComponentSprite;
 import com.teamwizardry.librarianlib.features.guicontainer.GuiContainerBase;
@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiBedrockBore extends GuiContainerBase
 {
-	public static Texture spriteSheet = new Texture(new ResourceLocation(ModInfo.MOD_ID, "textures/gui/bedrock_bore.png"));
+	public static Texture spriteSheet = new Texture(new ResourceLocation(InhumanResources.MOD_ID, "textures/gui/bedrock_bore.png"));
 	public static Sprite texture = spriteSheet.getSprite("background", 176, 166);
 	public static Sprite progress = spriteSheet.getSprite("progress_bar", 29, 12);
 	

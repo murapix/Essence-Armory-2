@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "inhumanresources:blocks/block_probability_beacon_portal"
+	}
+}

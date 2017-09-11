@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.utils.IUpgradable;
 import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.inhumanresources.common.utils.lib.ModInfo;
 import com.teamwizardry.inhumanresources.init.DamageRegistry;
 import com.teamwizardry.inhumanresources.init.PotionRegistry;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
@@ -66,7 +65,7 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 		if (stack.hasTagCompound())
 		{
 			itemTag = stack.getTagCompound();
-//			if (stack.getTagCompound().hasKey(ModInfo.MOD_ID))
+//			if (stack.getTagCompound().hasKey(InhumanResources.MOD_ID))
 //				return;
 		}
 		else itemTag = new NBTTagCompound();
@@ -78,7 +77,7 @@ public class ItemMistwroughtSword extends ItemModSword implements IUpgradable
 		compound.setString(OFFENSIVE_UPGRADE, ARMOR_PIERCE);
 		compound.setString(DEFENSIVE, LIFE_LINK);
 		compound.setString(DEFENSIVE_UPGRADE, LIFE_WARD);
-		itemTag.setTag(ModInfo.MOD_ID, compound);
+		itemTag.setTag(InhumanResources.MOD_ID, compound);
 		stack.setTagCompound(itemTag);
 	}
 	
