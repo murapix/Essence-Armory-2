@@ -1,14 +1,21 @@
 package com.teamwizardry.inhumanresources.init;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.teamwizardry.inhumanresources.common.potions.PotionCritBonus;
 import com.teamwizardry.inhumanresources.common.potions.PotionMaxCrit;
 import com.teamwizardry.inhumanresources.common.potions.PotionRedstoneNeedle;
 import com.teamwizardry.inhumanresources.common.potions.PotionStun;
 
 import net.minecraft.potion.Potion;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PotionRegistry
 {
+	public static List<Potion> potions = new LinkedList<>();
+	
 	public static Potion REDSTONE_NEEDLE;
 	public static Potion STUN;
 	public static Potion CRIT_BONUS;
@@ -22,4 +29,11 @@ public class PotionRegistry
 		CRIT_BONUS = new PotionCritBonus("crit_bonus", false, 0x7F7F7F, index++);
 		MAX_CRIT = new PotionMaxCrit("max_crit", false, 0xFF7F7F, index++);
 	}
+	
+	@SubscribeEvent
+	public void registerPotions(RegistryEvent.Register<Potion> event)
+	{
+		potions.forEach(potion -> event.getRegistry().register(potion));
+	}
+
 }

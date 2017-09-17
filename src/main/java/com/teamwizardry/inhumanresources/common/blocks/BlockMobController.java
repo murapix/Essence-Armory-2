@@ -13,7 +13,7 @@ import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.invent
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.inventory.InteractionInventoryPush;
 import com.teamwizardry.inhumanresources.common.entity.tasks.interactions.movement.InteractionPatrol;
 import com.teamwizardry.inhumanresources.common.utils.Util;
-import com.teamwizardry.librarianlib.features.base.block.BlockModContainer;
+import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

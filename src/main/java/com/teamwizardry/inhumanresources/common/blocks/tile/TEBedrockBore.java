@@ -10,7 +10,7 @@ import static net.minecraft.util.EnumFacing.WEST;
 import com.teamwizardry.inhumanresources.common.utils.FilteredItemHandler;
 import com.teamwizardry.inhumanresources.init.ItemRegistry;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
-import com.teamwizardry.librarianlib.features.base.block.TileModTickable;
+import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
 import com.teamwizardry.librarianlib.features.saving.CapabilityProvide;
 import com.teamwizardry.librarianlib.features.saving.Save;
 

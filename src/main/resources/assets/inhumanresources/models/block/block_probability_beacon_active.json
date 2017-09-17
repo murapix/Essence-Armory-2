@@ -1,0 +1,78 @@
+{
+	"__comment": "Designed by Febilian with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"beacon_middle_side": "inhumanresources:blocks/probability_beacon_middle_side_active",
+		"beacon_middle_up": "inhumanresources:blocks/probability_beacon_middle_up_active",
+		"beacon_glass": "inhumanresources:blocks/probability_beacon_glass",
+		"base_up": "inhumanresources:blocks/probability_beacon_base_up",
+		"base_down": "inhumanresources:blocks/probability_beacon_base_down"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "center",
+			"from": [ 3, 3, 3 ],
+			"to": [ 13, 13, 13 ],
+			"faces": {
+				"up": { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon_middle_up" },
+				"north": { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon_middle_side" },
+				"south": { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon_middle_side" },
+				"west": { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon_middle_side" },
+				"east": { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon_middle_side" }
+			}
+		},
+		{
+			"__comment": "case",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon_glass" }
+			}
+		},
+		{
+			"__comment": "base",
+			"from": [ 2, 0.001, 2 ],
+			"to": [ 14, 3, 14 ],
+			"faces": {
+				"down": { "uv": [ 2, 2, 14, 14 ], "texture": "#base_down" },
+				"up": { "uv": [ 2, 2, 14, 14 ], "texture": "#base_up" },
+				"north": { "uv": [ 2, 13, 14, 16 ], "texture": "#beacon_middle_side" },
+				"south": { "uv": [ 2, 13, 14, 16 ], "texture": "#beacon_middle_side" },
+				"west": { "uv": [ 2, 13, 14, 16 ], "texture": "#beacon_middle_side" },
+				"east": { "uv": [ 2, 13, 14, 16 ], "texture": "#beacon_middle_side" }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"gui": {
+			"rotation":  [ 30, 225, 0 ],
+			"scale":  [ 0.625, 0.625, 0.625 ]
+		},
+		"ground": {
+			"translation":  [ 0, 3, 0 ],
+			"scale":  [ 0.25, 0.25, 0.25 ]
+		}
+	}
+}

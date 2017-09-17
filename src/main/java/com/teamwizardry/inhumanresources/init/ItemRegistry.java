@@ -1,6 +1,7 @@
 package com.teamwizardry.inhumanresources.init;
 
 import com.teamwizardry.inhumanresources.common.items.ItemComponent;
+import com.teamwizardry.inhumanresources.common.items.ItemMagnet;
 import com.teamwizardry.inhumanresources.common.items.ItemMistwroughtAxe;
 import com.teamwizardry.inhumanresources.common.items.ItemMistwroughtSword;
 import com.teamwizardry.inhumanresources.common.items.ItemNeedle;
@@ -31,6 +32,8 @@ public class ItemRegistry
 	public static ItemModSword mistwroughtSword;
 	public static ItemModSword mistwroughtClaw;
 	public static ItemModTool mistwroughtAxe;
+	
+	public static ItemMod magnet;
 
 	public static void init()
 	{
@@ -46,5 +49,7 @@ public class ItemRegistry
 		mistwroughtSword = new ItemMistwroughtSword("mistwroughtSword", mistwrought);
 		mistwroughtAxe = new ItemMistwroughtAxe("mistwroughtAxe", mistwrought);
 		MinecraftForge.EVENT_BUS.register(mistwroughtSword);
+		
+		magnet = new ItemMagnet("magnet");
 	}
 }

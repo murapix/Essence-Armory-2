@@ -1,5 +1,8 @@
 package com.teamwizardry.inhumanresources.common.entity.mobs;
 
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIFollowOwner;
+import com.teamwizardry.inhumanresources.common.entity.ai.MobAIGetNextTarget;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -19,14 +22,13 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIFollowOwner;
-import com.teamwizardry.inhumanresources.common.entity.ai.MobAIGetNextTarget;
 
 public class MobSlime extends MobBase
 {
@@ -188,7 +190,7 @@ public class MobSlime extends MobBase
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource damageSource)
 	{
 		return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_HURT : SoundEvents.ENTITY_SLIME_HURT;
 	}

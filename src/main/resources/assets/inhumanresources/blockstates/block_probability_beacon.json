@@ -1,16 +1,28 @@
 {
 	"variants": {
-		"variant=none": {
-			"model": "inhumanresources:none"
+		"active=true,attunement=none": {
+			"model": "inhumanresources:block_probability_beacon_active"
 		},
-		"variant=fortune": {
-			"model": "inhumanresources:fortune"
+		"active=true,attunement=fortune": {
+			"model": "inhumanresources:block_probability_beacon_active"
 		},
-		"variant=looting": {
-			"model": "inhumanresources:looting"
+		"active=true,attunement=looting": {
+			"model": "inhumanresources:block_probability_beacon_active"
 		},
-		"variant=portal": {
-			"model": "inhumanresources:portal"
+		"active=true,attunement=portal": {
+			"model": "inhumanresources:block_probability_beacon_active"
+		},
+		"active=false,attunement=none": {
+			"model": "inhumanresources:block_probability_beacon"
+		},
+		"active=false,attunement=fortune": {
+			"model": "inhumanresources:block_probability_beacon"
+		},
+		"active=false,attunement=looting": {
+			"model": "inhumanresources:block_probability_beacon"
+		},
+		"active=false,attunement=portal": {
+			"model": "inhumanresources:block_probability_beacon"
 		}
 	}
 }

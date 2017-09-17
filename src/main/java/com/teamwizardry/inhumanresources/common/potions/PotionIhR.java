@@ -3,17 +3,17 @@ package com.teamwizardry.inhumanresources.common.potions;
 import org.lwjgl.opengl.GL11;
 
 import com.teamwizardry.inhumanresources.InhumanResources;
+import com.teamwizardry.inhumanresources.init.PotionRegistry;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,11 +25,12 @@ public class PotionIhR extends Potion
 	public PotionIhR(String name, boolean badEffect, int color, int iconIndex)
 	{
 		super(badEffect, color);
-		GameRegistry.register(this, new ResourceLocation(InhumanResources.MOD_ID, name));
+		setRegistryName(new ResourceLocation(InhumanResources.MOD_ID, name));
 		setPotionName(InhumanResources.MOD_ID + ".potion." + name);
 		this.iconIndex = iconIndex;
+		PotionRegistry.potions.add(this);
 	}
-
+	
 	public boolean hasEffect(EntityLivingBase entity)
 	{
 		return hasEffect(entity, this);
@@ -59,17 +60,17 @@ public class PotionIhR extends Potion
 	{
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vb = tessellator.getBuffer();
-		vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		BufferBuilder buffBuild = tessellator.getBuffer();
+		buffBuild.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 		GlStateManager.color(1, 1, 1, alpha);
 		
 		int textureX = iconIndex % 8 * 18;
 		int textureY = 198 + iconIndex / 8 * 18;
 		
-		vb.pos(x, y + 18, 0).tex(textureX * 0.00390625, (textureY + 18) * 0.00390625).endVertex();
-		vb.pos(x + 18, y + 18, 0).tex((textureX + 18) * 0.00390625, (textureY + 18) * 0.00390625).endVertex();
-		vb.pos(x + 18, y, 0).tex((textureX + 18) * 0.00390625, textureY * 0.00390625).endVertex();
-		vb.pos(x, y, 0).tex(textureX * 0.00390625, textureY * 0.00390625).endVertex();
+		buffBuild.pos(x, y + 18, 0).tex(textureX * 0.00390625, (textureY + 18) * 0.00390625).endVertex();
+		buffBuild.pos(x + 18, y + 18, 0).tex((textureX + 18) * 0.00390625, (textureY + 18) * 0.00390625).endVertex();
+		buffBuild.pos(x + 18, y, 0).tex((textureX + 18) * 0.00390625, textureY * 0.00390625).endVertex();
+		buffBuild.pos(x, y, 0).tex(textureX * 0.00390625, textureY * 0.00390625).endVertex();
 
 		tessellator.draw();
 	}

@@ -1,22 +1,35 @@
 package com.teamwizardry.inhumanresources.common.event;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.entity.mobs.MobBase;
+import com.teamwizardry.inhumanresources.common.items.ItemMagnet;
+import com.teamwizardry.inhumanresources.common.items.ItemMagnet.EnumMagnetType;
 import com.teamwizardry.inhumanresources.common.utils.IUpgradable;
+import com.teamwizardry.inhumanresources.init.ItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EventHandler
 {
@@ -30,6 +43,13 @@ public class EventHandler
 			MobBase mob = (MobBase) event.getTarget();
 			if (mob.getOwnerId() == null) mob.setOwner(event.getEntityPlayer());
 		}
+	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void onTextureStitch(TextureStitchEvent event)
+	{
+		event.getMap().registerSprite(new ResourceLocation(InhumanResources.MOD_ID, "particles/blur"));
 	}
 	
 	@SubscribeEvent
@@ -56,6 +76,7 @@ public class EventHandler
 		event.setLootingLevel(event.getLootingLevel() + lootingBonus);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onBlockBreak(HarvestDropsEvent event)
 	{
@@ -124,6 +145,128 @@ public class EventHandler
 				((IUpgradable) weapon.getItem()).onAttackEntity(event, attacker, target, weapon, offhand);
 			if (weapon != null && weapon.getItem() instanceof IUpgradable)
 				((IUpgradable) weapon.getItem()).onAttackEntity(event, attacker, target, weapon, offhand);
+		}
+	}
+	
+	@SubscribeEvent
+	public void magnetEntityDrops(LivingDropsEvent event)
+	{
+		Entity sourceEntity = event.getSource().getTrueSource();
+		if (sourceEntity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) sourceEntity;
+			for (ItemStack item : player.inventory.mainInventory)
+			{
+				if (item.getItem() == ItemRegistry.magnet)
+				{
+					if (item.getItemDamage() == EnumMagnetType.ALL.ordinal())
+					{
+						List<EntityItem> drops = new LinkedList<>();
+						for (EntityItem drop : event.getDrops())
+							drops.add(drop);
+						event.getDrops().clear();
+						ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+						return;
+					}
+					if (item.getItemDamage() == EnumMagnetType.MELEE.ordinal())
+					{
+						if (event.getSource().getImmediateSource().equals(player))
+						{
+							List<EntityItem> drops = new LinkedList<>();
+							for (EntityItem drop : event.getDrops())
+								drops.add(drop);
+							event.getDrops().clear();
+							ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+							return;
+						}
+					}
+					if (item.getItemDamage() == EnumMagnetType.RANGED.ordinal())
+					{
+						if (!event.getSource().getImmediateSource().equals(player))
+						{
+							List<EntityItem> drops = new LinkedList<>();
+							for (EntityItem drop : event.getDrops())
+								drops.add(drop);
+							event.getDrops().clear();
+							ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+							return;
+						}
+					}
+				}
+			}
+			for (ItemStack item : player.inventory.offHandInventory)
+			{
+				if (item.getItem() == ItemRegistry.magnet)
+				{
+					if (item.getItemDamage() == EnumMagnetType.ALL.ordinal())
+					{
+						List<EntityItem> drops = new LinkedList<>();
+						for (EntityItem drop : event.getDrops())
+							drops.add(drop);
+						event.getDrops().clear();
+						ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+						return;
+					}
+					if (item.getItemDamage() == EnumMagnetType.MELEE.ordinal())
+					{
+						if (event.getSource().getImmediateSource().equals(player))
+						{
+							List<EntityItem> drops = new LinkedList<>();
+							for (EntityItem drop : event.getDrops())
+								drops.add(drop);
+							event.getDrops().clear();
+							ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+							return;
+						}
+					}
+					if (item.getItemDamage() == EnumMagnetType.RANGED.ordinal())
+					{
+						if (!event.getSource().getImmediateSource().equals(player))
+						{
+							List<EntityItem> drops = new LinkedList<>();
+							for (EntityItem drop : event.getDrops())
+								drops.add(drop);
+							event.getDrops().clear();
+							ItemMagnet.magnetItems(player.world, player, NonNullList.from(ItemStack.EMPTY, drops.stream().map(EntityItem::getItem).toArray(ItemStack[]::new)));
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void magnetBlockDrops(HarvestDropsEvent event)
+	{
+		EntityPlayer player = event.getHarvester();
+		if (player == null)
+			return;
+		if (player.inventory == null)
+			return;
+		for (ItemStack item : player.inventory.mainInventory)
+		{
+			if (item.getItem() == ItemRegistry.magnet && (item.getItemDamage() == EnumMagnetType.MINE.ordinal() || item.getItemDamage() == EnumMagnetType.ALL.ordinal()))
+			{
+				List<ItemStack> drops = new LinkedList<>();
+				for (ItemStack drop : event.getDrops())
+					drops.add(drop);
+				event.getDrops().clear();
+				ItemMagnet.magnetItems(event.getWorld(), player, drops);
+				return;
+			}
+		}
+		for (ItemStack item : player.inventory.offHandInventory)
+		{
+			if (item.getItem() == ItemRegistry.magnet && (item.getItemDamage() == EnumMagnetType.MINE.ordinal() || item.getItemDamage() == EnumMagnetType.ALL.ordinal()))
+			{
+				List<ItemStack> drops = new LinkedList<>();
+				for (ItemStack drop : event.getDrops())
+					drops.add(drop);
+				event.getDrops().clear();
+				ItemMagnet.magnetItems(event.getWorld(), player, drops);
+				return;
+			}
 		}
 	}
 }
