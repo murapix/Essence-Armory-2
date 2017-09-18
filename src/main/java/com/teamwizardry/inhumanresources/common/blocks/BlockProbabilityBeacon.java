@@ -100,24 +100,5 @@ public class BlockProbabilityBeacon extends BlockModContainer
 	
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos from)
-	{
-		TileEntity te = world.getTileEntity(pos);
-		if (te instanceof TEProbabilityBeacon)
-		{
-			if (state.getValue(ACTIVE))
-			{
-				if (world.getBlockState(pos.down()).getBlock() != Blocks.IRON_BLOCK)
-				{
-					world.setBlockState(pos, state.withProperty(ACTIVE, false), 18);
-				}
-			}
-			else
-			{
-				if (world.getBlockState(pos.down()).getBlock() == Blocks.IRON_BLOCK)
-				{
-					world.setBlockState(pos, state.withProperty(ACTIVE, true), 18);
-				}
-			}
-		}
-	}
+	{}
 }

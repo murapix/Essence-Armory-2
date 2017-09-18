@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"attunement=none": {
+			"model": "inhumanresources:block_probability_upgrade"
+		},
+		"attunement=range": {
+			"model": "inhumanresources:block_probability_upgrade"
+		},
+		"attunement=level": {
+			"model": "inhumanresources:block_probability_upgrade"
+		}
+	}
+}
