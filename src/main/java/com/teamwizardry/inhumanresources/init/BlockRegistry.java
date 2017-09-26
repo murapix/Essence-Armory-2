@@ -17,11 +17,15 @@ public class BlockRegistry
 	
 	public static BlockMod blockProbabilityUpgrade;
 	
+	public static BlockMod blockObsidianPlated;
+	
 	public static void init()
 	{
 		blockBedrockBore = new BlockBedrockBore("block_bedrock_bore", Material.ROCK);
 		blockDuplicator = new BlockDuplicator("block_duplicator", Material.IRON);
 		blockProbabilityBeacon = new BlockProbabilityBeacon("block_probability_beacon", Material.IRON);
-		blockProbabilityUpgrade = new BlockProbabilityUpgrade("block_probability_upgrade", Material.IRON);
+		blockProbabilityUpgrade = new BlockProbabilityUpgrade("block_probability_upgrade", Material.ROCK);
+		
+		blockObsidianPlated = new BlockMod("block_obsidian_plated", Material.ROCK);
 	}
 }

@@ -1,7 +1,5 @@
 package com.teamwizardry.inhumanresources.common.blocks;
 
-import java.util.List;
-
 import com.teamwizardry.inhumanresources.InhumanResources;
 import com.teamwizardry.inhumanresources.common.blocks.tile.TEBedrockBore;
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;

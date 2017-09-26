@@ -1,14 +1,14 @@
 [
 {
-  "modid": "essencearmory",
-  "name": "Essence Armory",
-  "description": "Adds armors.",
+  "modid": "inhumanresources",
+  "name": "Inhuman Resources",
+  "description": "",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Escapee,SirShadow"],
-  "credits": "To us!",
+  "authorList": ["Escapee"],
+  "credits": "Febilian, for the textures",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
